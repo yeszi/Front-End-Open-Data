@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dataset - Open Data Tanjungpinang</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="C:\Front-End-Open-Data-Tanjungpinang\Front-End-Open-Data-Tanjungpinang\Menu Navbar\css\dataset.css">
+    <style>
+        /* Additional CSS specific for dataset page */
+        .dataset-page {
+            padding: 40px 20px;
+            background-color: var(--bg-body);
+        }
+        
+        .dataset-header {
+            margin-bottom: 30px;
+        }
+        
+        .dataset-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .dataset-header p {
+            color: var(--text-muted);
+            max-width: 800px;
+        }
+        
+        .dataset-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+            background-color: var(--bg-card);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .filter-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+        
+        .filter-group select,
+        .filter-group input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--input-border);
+            border-radius: 4px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+        }
+        
+        .dataset-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .dataset-card {
+            background-color: var(--bg-card);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .dataset-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+        
+        .card-header {
+            padding: 15px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .card-header h3 {
+            margin: 0;
+            color: var(--text-color);
+            font-size: 1.2rem;
+        }
+        
+        .card-body {
+            padding: 15px;
+        }
+        
+        .dataset-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        
+        .dataset-description {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .dataset-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary);
+        }
+        
+        .btn-outline {
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        
+        .pagination a {
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            color: var(--text-color);
+            border: 1px solid var(--input-border);
+        }
+        
+        .pagination a.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .pagination a:hover:not(.active) {
+            background-color: rgba(0,0,0,0.05);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .dataset-header h1 {
+                font-size: 2rem;
+            }
+            
+            .dataset-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-group {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <p>Memuat Data...</p>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="../images/logo open data.png" alt="Open Data Logo">
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul id="mainMenu">
+                <li><a href="../index.html">Beranda</a></li>
+                <li><a href="dataset.html" class="active">Dataset</a></li>
+                <li><a href="../organisasi.html">Organisasi</a></li>
+                <li><a href="../grup.html">Grup</a></li>
+                <li><a href="../tentang.html">Tentang</a></li>
+                <li><a href="../ketentuan pengguna.html">Ketentuan</a></li>
+            </ul>
+            <li class="mode-toggle">
+                <button id="darkModeBtn" class="icon-toggle" aria-label="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </li>
+        </nav>
+    </header>
+
+    <main class="dataset-page">
+        <div class="container">
+            <div class="dataset-header">
+                <h1>Koleksi Dataset</h1>
+                <p>Temukan dan eksplor berbagai dataset terbuka dari Pemerintah Kota Tanjungpinang. Data tersedia dalam berbagai format yang dapat diunduh dan digunakan sesuai kebutuhan Anda.</p>
+            </div>
+            
+            <div class="dataset-filters">
+                <div class="filter-group">
+                    <label for="category">Kategori</label>
+                    <select id="category">
+                        <option value="">Semua Kategori</option>
+                        <option value="kependudukan">Kependudukan</option>
+                        <option value="kesehatan">Kesehatan</option>
+                        <option value="pendidikan">Pendidikan</option>
+                        <option value="infrastruktur">Infrastruktur</option>
+                        <option value="ekonomi">Ekonomi</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="organization">Organisasi</label>
+                    <select id="organization">
+                        <option value="">Semua Organisasi</option>
+                        <option value="dinkes">Dinas Kesehatan</option>
+                        <option value="dindik">Dinas Pendidikan</option>
+                        <option value="disdukcapil">Dinas Kependudukan</option>
+                        <option value="pupr">Dinas PUPR</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="search">Cari Dataset</label>
+                    <input type="text" id="search" placeholder="Masukkan kata kunci...">
+                </div>
+            </div>
+            
+            <div class="dataset-grid">
+                <!-- Dataset Card 1 -->
+                <div class="dataset-card">
+                    <div class="card-header">
+                        <h3>Data Kependudukan 2023</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="dataset-meta">
+                            <span>Dinas Kependudukan</span>
+                            <span>15 Jun 2023</span>
+                        </div>
+                        <div class="dataset-description">
+                            Data demografi penduduk Kota Tanjungpinang tahun 2023 mencakup jumlah penduduk, distribusi usia, dan kepadatan per kecamatan.
+                        </div>
+                        <div class="dataset-actions">
+                            <a href="#" class="btn btn-primary">Unduh</a>
+                            <a href="#" class="btn btn-outline">Detail</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dataset Card 2 -->
+                <div class="dataset-card">
+                    <div class="card-header">
+                        <h3>Fasilitas Kesehatan</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="dataset-meta">
+                            <span>Dinas Kesehatan</span>
+                            <span>10 Mei 2023</span>
+                        </div>
+                        <div class="dataset-description">
+                            Daftar lengkap fasilitas kesehatan di Kota Tanjungpinang termasuk rumah sakit, puskesmas, dan klinik beserta lokasi dan fasilitas yang tersedia.
+                        </div>
+                        <div class="dataset-actions">
+                            <a href="#" class="btn btn-primary">Unduh</a>
+                            <a href="#" class="btn btn-outline">Detail</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dataset Card 3 -->
+                <div class="dataset-card">
+                    <div class="card-header">
+                        <h3>Sekolah dan Madrasah</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="dataset-meta">
+                            <span>Dinas Pendidikan</span>
+                            <span>28 Apr 2023</span>
+                        </div>
+                        <div class="dataset-description">
+                            Data sekolah dan madrasah di Kota Tanjungpinang meliputi SD, SMP, SMA/SMK negeri dan swasta beserta jumlah siswa dan guru.
+                        </div>
+                        <div class="dataset-actions">
+                            <a href="#" class="btn btn-primary">Unduh</a>
+                            <a href="#" class="btn btn-outline">Detail</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dataset Card 4 -->
+                <div class="dataset-card">
+                    <div class="card-header">
+                        <h3>Jaringan Jalan</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="dataset-meta">
+                            <span>Dinas PUPR</span>
+                            <span>12 Apr 2023</span>
+                        </div>
+                        <div class="dataset-description">
+                            Data jaringan jalan Kota Tanjungpinang mencakup kondisi jalan, panjang, lebar, dan status jalan (nasional/provinsi/kota).
+                        </div>
+                        <div class="dataset-actions">
+                            <a href="#" class="btn btn-primary">Unduh</a>
+                            <a href="#" class="btn btn-outline">Detail</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dataset Card 5 -->
+                <div class="dataset-card">
+                    <div class="card-header">
+                        <h3>Pasar Tradisional</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="dataset-meta">
+                            <span>Dinas Perdagangan</span>
+                            <span>5 Mar 2023</span>
+                        </div>
+                        <div class="dataset-description">
+                            Lokasi dan data pasar tradisional di Kota Tanjungpinang termasuk jumlah pedagang, jenis komoditas, dan jam operasional.
+                        </div>
+                        <div class="dataset-actions">
+                            <a href="#" class="btn btn-primary">Unduh</a>
+                            <a href="#" class="btn btn-outline">Detail</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dataset Card 6 -->
+                <div class="dataset-card">
+                    <div class="card-header">
+                        <h3>Data Kemiskinan</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="dataset-meta">
+                            <span>Dinas Sosial</span>
+                            <span>20 Feb 2023</span>
+                        </div>
+                        <div class="dataset-description">
+                            Data keluarga miskin dan rentan miskin di Kota Tanjungpinang berdasarkan kriteria yang ditetapkan pemerintah.
+                        </div>
+                        <div class="dataset-actions">
+                            <a href="#" class="btn btn-primary">Unduh</a>
+                            <a href="#" class="btn btn-outline">Detail</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pagination">
+                <a href="#">&laquo;</a>
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">&raquo;</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <img src="../images/logo pemkot.jpg">
+                    <img src="../images/logo diskominfo.jpg">
+                    <p>Open Data Kota Tanjungpinang</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Tautan Cepat</h3>
+                    <ul>
+                        <li><a href="../index.html">Beranda</a></li>
+                        <li><a href="dataset.html">Dataset</a></li>
+                        <li><a href="../organisasi.html">Organisasi</a></li>
+                        <li><a href="../tentang.html">Tentang</a></li>
+                        <li><a href="../ketentuan pengguna.html">Ketentuan Pengguna</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Kategori</h3>
+                    <ul>
+                        <li><a href="#">Kependudukan</a></li>
+                        <li><a href="#">Kesehatan</a></li>
+                        <li><a href="#">Pendidikan</a></li>
+                        <li><a href="#">Infrastruktur</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Kontak</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Jl. Merdeka No. 1, Tanjungpinang</li>
+                        <li><i class="fas fa-phone"></i> (0771) 123456</li>
+                        <li><i class="fas fa-envelope"></i> opendata@tanjungpinangkota.go.id</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Open Data Tanjungpinang Created By Grayesi &copy;
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load user preferences for dark mode
+            const body = document.body;
+            const darkModeBtn = document.getElementById('darkModeBtn');
+            
+            function loadUserPreferences() {
+                const isDarkMode = localStorage.getItem('darkMode') === 'true';
+                
+                if (isDarkMode) {
+                    body.classList.add('dark-mode');
+                    darkModeBtn.classList.add('active');
+                }
+            }
+            
+            // Toggle dark mode
+            function toggleDarkMode() {
+                body.classList.toggle('dark-mode');
+                const isDarkMode = body.classList.contains('dark-mode');
+                localStorage.setItem('darkMode', isDarkMode);
+                darkModeBtn.classList.toggle('active', isDarkMode);
+            }
+            
+            darkModeBtn.addEventListener('click', toggleDarkMode);
+            
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainMenu = document.getElementById('mainMenu');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                mainMenu.classList.toggle('active');
+                this.innerHTML = mainMenu.classList.contains('active') ?
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Hide loader when page is loaded
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 1000);
+            
+            // Initialize the page
+            loadUserPreferences();
+            
+            // Filter functionality (placeholder)
+            const searchInput = document.getElementById('search');
+            const categorySelect = document.getElementById('category');
+            const orgSelect = document.getElementById('organization');
+            
+            [searchInput, categorySelect, orgSelect].forEach(element => {
+                element.addEventListener('change', function() {
+                    // In a real implementation, this would filter the dataset cards
+                    console.log('Filter changed:', {
+                        search: searchInput.value,
+                        category: categorySelect.value,
+                        organization: orgSelect.value
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

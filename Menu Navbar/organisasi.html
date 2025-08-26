@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Data Tanjungpinang</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="C:\Front-End-Open-Data-Tanjungpinang\Front-End-Open-Data-Tanjungpinang\Menu Navbar\css\organisasi.css">
+</head>
+<body>
+    <div class="top-popup" id="topPopup">
+        <p>Selamat Datang di Website Inii, Pilih Data Relevan yang sesuai kamu mau.</p>
+        <button id="closePopupBtn">&times;</button>
+    </div>
+
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <p>Memuat Data...</p>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="images/logo open data.png" alt="Open Data Logo">
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul id="mainMenu">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="menu navbar/dataset.html">Dataset</a></li>
+                <li><a href="organisasi.html" class="active">Organisasi</a></li>
+                <li><a href="grup.html">Grup</a></li>
+                <li><a href="tentang.html">Tentang</a></li>
+                <li><a href="ketentuan pengguna.html">Ketentuan</a></li>
+            </ul>
+                <li class="mode-toggle">
+                    <button id="darkModeBtn" class="icon-toggle" aria-label="Toggle Dark Mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <h1>Satu Data Tanjungpinang</h1>
+            <h2>Website Resmi Kota Tanjungpinang</h2>
+            
+            <div class="search-container">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Cari dataset...">
+                    <button id="searchBtn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-item" id="datasetStat">
+                    <span>0</span>
+                    <p>Dataset</p>
+                </div>
+                <div class="stat-item" id="orgStat">
+                    <span>0</span>
+                    <p>Organisasi</p>
+                </div>
+                <div class="stat-item" id="categoryStat">
+                    <span>0</span>
+                    <p>Kategori</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-opendata">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Apa Itu Open Data?</h2>
+                </div>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Open Data Kota Tanjungpinang adalah inisiatif digital Pemerintah Kota Tanjungpinang yang bertujuan untuk menyediakan data terbuka kepada masyarakat. Data terbuka adalah data yang dapat digunakan, dimanfaatkan, disebarluaskan oleh siapa saja dan untuk tujuan apapun.</p>
+                        <p>Platform ini menyediakan berbagai dataset dari berbagai sektor pemerintahan untuk mendukung transparansi, inovasi, dan pengambilan keputusan berbasis data.</p>
+                        <button id="learnMoreBtn" class="view-more">Pelajari Lebih Lanjut</button>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Open Data Illustration">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="latest-datasets">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Dataset Terbaru</h2>
+                </div>
+                <div class="carousel-container">
+                    <button class="carousel-nav prev" id="prevBtn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="carousel-track" id="carouselTrack">
+                        </div>
+                    <button class="carousel-nav next" id="nextBtn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div style="text-align: center;">
+                    <a href="#" class="view-more">Lihat Semua Dataset</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="categories">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Kategori Dataset</h2>
+                </div>
+                <div class="category-grid" id="categoryGrid">
+                    </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <img src="images/logo pemkot.jpg">
+                    <img src="images/logo diskominfo.jpg">
+                    <p>Open Data Kota Tanjungpinang</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Tautan Cepat</h3>
+                    <ul>
+                        <li><a href="">Beranda</a></li>
+                        <li><a href="dataset.html">Dataset</a></li>
+                        <li><a href="#">Organisasi</a></li>
+                        <li><a href="#">Tentang</a></li>
+                        <li><a href="#">Ketentuan Pengguna</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Kategori</h3>
+                    <ul>
+                        <li><a href="#">Kependudukan</a></li>
+                        <li><a href="#">Kesehatan</a></li>
+                        <li><a href="#">Pendidikan</a></li>
+                        <li><a href="#">Infrastruktur</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Kontak</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Jl. Merdeka No. 1, Tanjungpinang</li>
+                        <li><i class="fas fa-phone"></i> (0771) 123456</li>
+                        <li><i class="fas fa-envelope"></i> opendata@tanjungpinangkota.go.id</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025_Open Data Tanjungpinang Created By Grayesi &copy;
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Logika untuk pop-up yang muncul secara default dan hilang saat menggulir
+            const topPopup = document.getElementById('topPopup');
+            const closePopupBtn = document.getElementById('closePopupBtn');
+            const scrollThreshold = 100;
+
+            if (closePopupBtn) {
+                closePopupBtn.addEventListener('click', function() {
+                    topPopup.classList.add('hidden');
+                });
+            }
+
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > scrollThreshold) {
+                    topPopup.classList.add('hidden');
+                } else {
+                    topPopup.classList.remove('hidden');
+                }
+            });
+
+            // --- Logika Mode Malam ---
+            const body = document.body;
+            const darkModeBtn = document.getElementById('darkModeBtn');
+
+            function toggleDarkMode() {
+                body.classList.toggle('dark-mode');
+                const isDarkMode = body.classList.contains('dark-mode');
+                localStorage.setItem('darkMode', isDarkMode);
+                darkModeBtn.classList.toggle('active', isDarkMode);
+            }
+
+            darkModeBtn.addEventListener('click', toggleDarkMode);
+
+            function loadUserPreferences() {
+                const isDarkMode = localStorage.getItem('darkMode') === 'true';
+                
+                if (isDarkMode) {
+                    body.classList.add('dark-mode');
+                    darkModeBtn.classList.add('active');
+                }
+            }
+
+            // --- Akhir Logika Mode Malam ---
+
+            // Show loading screen
+            const loader = document.getElementById('loader');
+            loader.style.display = 'flex';
+
+            setTimeout(() => {
+                initApp();
+                loader.style.display = 'none';
+            }, 1500);
+
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainMenu = document.getElementById('mainMenu');
+
+            mobileMenuBtn.addEventListener('click', function() {
+                mainMenu.classList.toggle('active');
+                this.innerHTML = mainMenu.classList.contains('active') ?
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
+
+            // Animate stats counting
+            function animateStats() {
+                const datasetStat = document.getElementById('datasetStat').querySelector('span');
+                const orgStat = document.getElementById('orgStat').querySelector('span');
+                const categoryStat = document.getElementById('categoryStat').querySelector('span');
+                
+                animateValue(datasetStat, 0, 1436, 2000);
+                animateValue(orgStat, 0, 47, 1500);
+                animateValue(categoryStat, 0, 26, 1000);
+            }
+
+            function animateValue(element, start, end, duration) {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    element.innerHTML = Math.floor(progress * (end - start) + start);
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+
+            // Carousel functionality with infinite loop
+            let currentSlide = 0;
+            const carouselTrack = document.getElementById('carouselTrack');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const carouselContainer = document.querySelector('.carousel-container');
+            let autoSlideInterval;
+            const cardWidth = 280 + 20; // card-width + gap
+            let originalCardCount = 0;
+
+            const datasets = [
+                {
+                    id: 1,
+                    title: "Data Kependudukan 2023",
+                    category: "Kependudukan",
+                    org: "Dinas Kependudukan",
+                    date: "15 Jun 2023",
+                    desc: "Data demografi penduduk Kota Tanjungpinang tahun 2023",
+                    image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                },
+                {
+                    id: 2,
+                    title: "Fasilitas Kesehatan",
+                    category: "Kesehatan",
+                    org: "Dinas Kesehatan",
+                    date: "10 Mei 2023",
+                    desc: "Daftar fasilitas kesehatan di Kota Tanjungpinang",
+                    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                },
+                {
+                    id: 3,
+                    title: "Sekolah dan Madrasah",
+                    category: "Pendidikan",
+                    org: "Dinas Pendidikan",
+                    date: "28 Apr 2023",
+                    desc: "Data sekolah dan madrasah di Kota Tanjungpinang",
+                    image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                },
+                {
+                    id: 4,
+                    title: "Jaringan Jalan",
+                    category: "Infrastruktur",
+                    org: "Dinas PUPR",
+                    date: "12 Apr 2023",
+                    desc: "Data jaringan jalan Kota Tanjungpinang",
+                    image: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1413&q=80"
+                },
+                {
+                    id: 5,
+                    title: "Pasar Tradisional",
+                    category: "Ekonomi",
+                    org: "Dinas Perdagangan",
+                    date: "5 Mar 2023",
+                    desc: "Lokasi dan data pasar tradisional di Kota Tanjungpinang",
+                    image: "https://images.unsplash.com/photo-1580828343064-fde4fc206bc6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80"
+                }
+            ];
+            
+            function renderDatasetCards() {
+                carouselTrack.innerHTML = '';
+                originalCardCount = datasets.length;
+                
+                datasets.forEach(dataset => {
+                    const card = document.createElement('div');
+                    card.className = 'dataset-card';
+                    card.innerHTML = `
+                        <div class="card-image">
+                            <img src="${dataset.image}" alt="${dataset.title}">
+                            <span class="card-badge">${dataset.category}</span>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">${dataset.title}</h3>
+                            <div class="card-meta">
+                                <span>${dataset.org}</span>
+                                <span>${dataset.date}</span>
+                            </div>
+                            <p class="card-desc">${dataset.desc}</p>
+                            <a href="#" class="card-btn" data-id="${dataset.id}">Unduh Dataset</a>
+                        </div>
+                    `;
+                    carouselTrack.appendChild(card);
+                });
+                
+                // Clone the first few cards for a seamless loop
+                const clonedCards = [];
+                for (let i = 0; i < 3; i++) {
+                    const clone = carouselTrack.children[i].cloneNode(true);
+                    clonedCards.push(clone);
+                }
+                clonedCards.forEach(clone => carouselTrack.appendChild(clone));
+                
+                document.querySelectorAll('.card-btn').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const datasetId = this.getAttribute('data-id');
+                        showToast(`Memulai unduhan dataset #${datasetId}`);
+                    });
+                });
+            }
+
+            // Fungsi untuk menggeser carousel
+            function updateCarousel() {
+                carouselTrack.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
+            }
+            
+            function nextSlide() {
+                // Jika sudah di cloned cards, reset ke awal
+                if (currentSlide >= originalCardCount) {
+                    currentSlide = 1;
+                    carouselTrack.classList.add('no-transition');
+                    updateCarousel();
+                    setTimeout(() => {
+                        carouselTrack.classList.remove('no-transition');
+                    }, 50);
+                } else {
+                    currentSlide++;
+                    updateCarousel();
+                }
+            }
+
+            function prevSlide() {
+                // Jika di awal, pindah ke cloned cards
+                if (currentSlide <= 0) {
+                    currentSlide = originalCardCount - 1;
+                    carouselTrack.classList.add('no-transition');
+                    updateCarousel();
+                    setTimeout(() => {
+                        carouselTrack.classList.remove('no-transition');
+                        currentSlide--;
+                        updateCarousel();
+                    }, 50);
+                } else {
+                    currentSlide--;
+                    updateCarousel();
+                }
+            }
+
+            function startAutoSlide() {
+                stopAutoSlide(); // Hentikan slide yang mungkin berjalan
+                autoSlideInterval = setInterval(() => {
+                    nextSlide();
+                }, 5000); // Geser setiap 5 detik
+            }
+
+            function stopAutoSlide() {
+                clearInterval(autoSlideInterval);
+            }
+
+            // Tambahkan event listener untuk kontrol manual dan interaksi mouse
+            prevBtn.addEventListener('click', prevSlide);
+            nextBtn.addEventListener('click', nextSlide);
+
+            carouselContainer.addEventListener('mouseenter', stopAutoSlide);
+            carouselContainer.addEventListener('mouseleave', startAutoSlide);
+
+            // Generate category cards
+            const categories = [
+                { name: "Kependudukan", count: 324, icon: "fas fa-users" },
+                { name: "Kesehatan", count: 156, icon: "fas fa-hospital" },
+                { name: "Pendidikan", count: 98, icon: "fas fa-school" },
+                { name: "Infrastruktur", count: 210, icon: "fas fa-road" },
+                { name: "Ekonomi", count: 187, icon: "fas fa-chart-line" },
+                { name: "Lingkungan", count: 76, icon: "fas fa-tree" },
+                { name: "Sosial", count: 112, icon: "fas fa-hands-helping" },
+                { name: "Pariwisata", count: 89, icon: "fas fa-umbrella-beach" }
+            ];
+
+            function renderCategoryCards() {
+                const categoryGrid = document.getElementById('categoryGrid');
+                categoryGrid.innerHTML = '';
+
+                categories.forEach(category => {
+                    const card = document.createElement('div');
+                    card.className = 'category-card';
+                    card.innerHTML = `
+                        <div class="category-icon">
+                            <i class="${category.icon}"></i>
+                        </div>
+                        <div class="category-content">
+                            <h3 class="category-title">${category.name}</h3>
+                            <p><span class="category-count">${category.count}</span> dataset tersedia</p>
+                        </div>
+                    `;
+                    categoryGrid.appendChild(card);
+                });
+            }
+
+            // Search functionality
+            const searchBtn = document.getElementById('searchBtn');
+            const searchInput = document.getElementById('searchInput');
+            
+            searchBtn.addEventListener('click', performSearch);
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') performSearch();
+            });
+
+            function performSearch() {
+                const query = searchInput.value.trim();
+                if (query) {
+                    showToast(`Mencari: "${query}"`);
+                }
+            }
+
+            // Learn more button
+            document.getElementById('learnMoreBtn').addEventListener('click', function() {
+                showToast('Mengarahkan ke halaman tentang');
+            });
+
+            // Toast notification
+            function showToast(message) {
+                const toast = document.getElementById('toast');
+                toast.textContent = message;
+                toast.classList.add('show');
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+
+            // Initialize the app
+            function initApp() {
+                loadUserPreferences();
+                animateStats();
+                renderDatasetCards();
+                renderCategoryCards();
+                updateCarousel();
+                
+                if (window.innerWidth <= 768) {
+                    prevBtn.style.display = 'none';
+                    nextBtn.style.display = 'none';
+                    stopAutoSlide();
+                } else {
+                    prevBtn.style.display = 'flex';
+                    nextBtn.style.display = 'flex';
+                    startAutoSlide();
+                }
+            }
+
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth <= 768) {
+                    prevBtn.style.display = 'none';
+                    nextBtn.style.display = 'none';
+                    stopAutoSlide();
+                } else {
+                    prevBtn.style.display = 'flex';
+                    nextBtn.style.display = 'flex';
+                    startAutoSlide();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
