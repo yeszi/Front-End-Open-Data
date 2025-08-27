@@ -12,7 +12,203 @@
         <p>Selamat Datang di Website Inii, Pilih Data Relevan yang sesuai kamu mau.</p>
         <button id="closePopupBtn">&times;</button>
     </div>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang - Open Data Tanjungpinang</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="C:\Front-End-Open-Data\Front-End-Open-Data\Menu Navbar\css\tentang.css">
+</head>
+<body>
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <p>Memuat Data...</p>
+        </div>
+    </div>
+    <div class="toast" id="toast"></div>
 
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="images/opendata tg.png" alt="Open Data Logo">
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul id="mainMenu">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="dataset.html">Dataset</a></li>
+                <li><a href="organisasi.html">Organisasi</a></li>
+                <li><a href="grup.html">Grup</a></li>
+                <li><a href="tentang.html" class="active">Tentang</a></li>
+                <li><a href="ketentuan_pengguna.html">Ketentuan</a></li>
+                <li class="mode-toggle">
+                    <button id="darkModeBtn" class="icon-toggle" aria-label="Toggle Dark Mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Halaman Tentang -->
+        <section class="about-section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Tentang Open Data Tanjungpinang</h2>
+                    <p>Mengenal lebih jauh tentang portal Open Data Kota Tanjungpinang</p>
+                </div>
+                
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Apa itu Open Data Tanjungpinang?</h3>
+                        <p>Open Data Tanjungpinang adalah portal resmi Pemerintah Kota Tanjungpinang yang menyediakan akses terbuka terhadap data-data pemerintah untuk meningkatkan transparansi, akuntabilitas, dan partisipasi masyarakat dalam pembangunan daerah.</p>
+                        <p>Portal ini merupakan wujud komitmen Pemerintah Kota Tanjungpinang dalam menerapkan prinsip pemerintahan terbuka (open government) dan mendukung inisiatif Satu Data Indonesia.</p>
+                        <p>Melalui Open Data Tanjungpinang, masyarakat dapat mengakses, mengunduh, dan memanfaatkan data yang tersedia untuk berbagai keperluan seperti penelitian, pengembangan aplikasi, maupun untuk keperluan bisnis.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://via.placeholder.com/600x400" alt="Gambar tentang Open Data Tanjungpinang">
+                    </div>
+                </div>
+                
+                <div class="mission-vision">
+                    <div class="mission-box">
+                        <h3><i class="fas fa-bullseye"></i> Misi Kami</h3>
+                        <ul>
+                            <li>Meningkatkan transparansi dan akuntabilitas pemerintahan melalui publikasi data</li>
+                            <li>Mendorong partisipasi masyarakat dalam proses pembangunan daerah</li>
+                            <li>Menyediakan data yang berkualitas, terpercaya, dan mudah diakses</li>
+                            <li>Mendorong inovasi dan pengembangan berbasis data</li>
+                            <li>Mendukung implementasi Satu Data Indonesia di tingkat daerah</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vision-box">
+                        <h3><i class="fas fa-eye"></i> Visi Kami</h3>
+                        <ul>
+                            <li>Menjadi portal data terbuka terdepan yang mendukung terwujudnya smart city</li>
+                            <li>Mewujudkan tata kelola pemerintahan yang transparan dan akuntabel</li>
+                            <li>Mendorong terciptanya ekosistem inovasi berbasis data di Kota Tanjungpinang</li>
+                            <li>Menjadi model penerapan open data bagi pemerintah daerah lainnya</li>
+                        </ul>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <img src="images/logo pemkot.jpg" alt="Logo Pemkot">
+                    <img src="images/logo diskominfo.jpg" alt="Logo Diskominfo">
+                    <p>Open Data Kota Tanjungpinang</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Tautan Cepat</h3>
+                    <ul>
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="dataset.html">Dataset</a></li>
+                        <li><a href="organisasi.html">Organisasi</a></li>
+                        <li><a href="grup.html">Group</a></li>
+                        <li><a href="tentang.html">Tentang</a></li>
+                        <li><a href="ketentuan_pengguna.html">Ketentuan Pengguna</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Kategori</h3>
+                    <ul>
+                        <li><a href="#">Kependudukan</a></li>
+                        <li><a href="#">Kesehatan</a></li>
+                        <li><a href="#">Pendidikan</a></li>
+                        <li><a href="#">Infrastruktur</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Kontak</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Jl. Merdeka No. 1, Tanjungpinang</li>
+                        <li><i class="fas fa-phone"></i> (0771) 123456</li>
+                        <li><i class="fas fa-envelope"></i> opendata@tanjungpinangkota.go.id</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Open Data Tanjungpinang Created By Grayesi &copy;
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // JavaScript untuk interaktivitas
+        document.addEventListener('DOMContentLoaded', function() {
+            // Loader
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 500);
+            }, 1500);
+            
+            // Toggle menu mobile
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainMenu = document.getElementById('mainMenu');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                mainMenu.classList.toggle('active');
+            });
+            
+            // Dark mode toggle
+            const darkModeBtn = document.getElementById('darkModeBtn');
+            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+            
+            // Cek preferensi sistem atau mode yang disimpan
+            if (localStorage.getItem('theme') === 'dark' || 
+                (!localStorage.getItem('theme') && prefersDarkScheme.matches)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                darkModeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+            
+            darkModeBtn.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                if (currentTheme === 'dark') {
+                    document.documentElement.removeAttribute('data-theme');
+                    darkModeBtn.innerHTML = '<i class="fas fa-moon"></i>';
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    darkModeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+                    localStorage.setItem('theme', 'dark');
+                }
+            });
+            
+            // Fungsi toast notification
+            function showToast(message) {
+                const toast = document.getElementById('toast');
+                toast.textContent = message;
+                toast.classList.add('show');
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
     <div class="loader" id="loader">
         <div class="loader-content">
             <div class="spinner"></div>
