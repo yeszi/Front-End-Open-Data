@@ -379,7 +379,6 @@
             }
 
             function prevSlide() {
-                // Jika di awal, pindah ke cloned cards
                 if (currentSlide <= 0) {
                     currentSlide = originalCardCount - 1;
                     carouselTrack.classList.add('no-transition');
@@ -396,14 +395,12 @@
             }
 
             function startAutoSlide() {
-                stopAutoSlide(); // Hentikan slide yang mungkin berjalan
                 autoSlideInterval = setInterval(() => {
                     nextSlide();
-                }, 5000); // Geser setiap 5 detik
+                }, 3000); // Geser setiap 3 detik
             }
 
             function stopAutoSlide() {
-                clearInterval(autoSlideInterval);
             }
 
             // Tambahkan event listener untuk kontrol manual dan interaksi mouse
