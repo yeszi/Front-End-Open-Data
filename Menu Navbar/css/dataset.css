@@ -1,12 +1,11 @@
 :root {
-    /* Mode Default (Siang) */
-    --primary: #2facc1;
-    --secondary: #0056b3;
-    --accent: #00b4d8;
-    --light: #B6EAF3;
+    --primary: #d13e3e;
+    --secondary: #CD1818;
+    --accent: #ED2B2A;
+    --light: #e7776f;
     --dark: #343a30;
     --success: #28a745;
-    --bg-body: #B6EAF3;
+    --bg-body: #db8a7c;
     --bg-card: white;
     --text-color: #333;
     --text-muted: #666;
