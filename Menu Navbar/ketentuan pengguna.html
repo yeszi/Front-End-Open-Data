@@ -5,29 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Open Data Tanjungpinang</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="C:\Front-End-Open-Data-Tanjungpinang\Front-End-Open-Data-Tanjungpinang\Menu Navbar\css\dataset.css">
+    <link rel="stylesheet" href="css/style.css"> 
 </head>
 <body>
     <div class="top-popup" id="topPopup">
         <p>Selamat Datang di Website Inii, Pilih Data Relevan yang sesuai kamu mau.</p>
         <button id="closePopupBtn">&times;</button>
     </div>
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tentang - Open Data Tanjungpinang</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="C:\Front-End-Open-Data\Front-End-Open-Data\Menu Navbar\css\tentang.css">
-</head>
-<body>
+
     <div class="loader" id="loader">
         <div class="loader-content">
             <div class="spinner"></div>
             <p>Memuat Data...</p>
         </div>
     </div>
+    
     <div class="toast" id="toast"></div>
 
     <header>
@@ -39,201 +31,12 @@
                 <i class="fas fa-bars"></i>
             </button>
             <ul id="mainMenu">
-                <li><a href="index.html">Beranda</a></li>
-                <li><a href="dataset.html">Dataset</a></li>
-                <li><a href="organisasi.html">Organisasi</a></li>
-                <li><a href="grup.html">Grup</a></li>
-                <li><a href="tentang.html" class="active">Tentang</a></li>
-                <li><a href="ketentuan_pengguna.html">Ketentuan</a></li>
-                <li class="mode-toggle">
-                    <button id="darkModeBtn" class="icon-toggle" aria-label="Toggle Dark Mode">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                </li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <!-- Halaman Tentang -->
-        <section class="about-section">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Tentang Open Data Tanjungpinang</h2>
-                    <p>Mengenal lebih jauh tentang portal Open Data Kota Tanjungpinang</p>
-                </div>
-                
-                <div class="about-content">
-                    <div class="about-text">
-                        <h3>Apa itu Open Data Tanjungpinang?</h3>
-                        <p>Open Data Tanjungpinang adalah portal resmi Pemerintah Kota Tanjungpinang yang menyediakan akses terbuka terhadap data-data pemerintah untuk meningkatkan transparansi, akuntabilitas, dan partisipasi masyarakat dalam pembangunan daerah.</p>
-                        <p>Portal ini merupakan wujud komitmen Pemerintah Kota Tanjungpinang dalam menerapkan prinsip pemerintahan terbuka (open government) dan mendukung inisiatif Satu Data Indonesia.</p>
-                        <p>Melalui Open Data Tanjungpinang, masyarakat dapat mengakses, mengunduh, dan memanfaatkan data yang tersedia untuk berbagai keperluan seperti penelitian, pengembangan aplikasi, maupun untuk keperluan bisnis.</p>
-                    </div>
-                    <div class="about-image">
-                        <img src="https://via.placeholder.com/600x400" alt="Gambar tentang Open Data Tanjungpinang">
-                    </div>
-                </div>
-                
-                <div class="mission-vision">
-                    <div class="mission-box">
-                        <h3><i class="fas fa-bullseye"></i> Misi Kami</h3>
-                        <ul>
-                            <li>Meningkatkan transparansi dan akuntabilitas pemerintahan melalui publikasi data</li>
-                            <li>Mendorong partisipasi masyarakat dalam proses pembangunan daerah</li>
-                            <li>Menyediakan data yang berkualitas, terpercaya, dan mudah diakses</li>
-                            <li>Mendorong inovasi dan pengembangan berbasis data</li>
-                            <li>Mendukung implementasi Satu Data Indonesia di tingkat daerah</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="vision-box">
-                        <h3><i class="fas fa-eye"></i> Visi Kami</h3>
-                        <ul>
-                            <li>Menjadi portal data terbuka terdepan yang mendukung terwujudnya smart city</li>
-                            <li>Mewujudkan tata kelola pemerintahan yang transparan dan akuntabel</li>
-                            <li>Mendorong terciptanya ekosistem inovasi berbasis data di Kota Tanjungpinang</li>
-                            <li>Menjadi model penerapan open data bagi pemerintah daerah lainnya</li>
-                        </ul>
-                    </div>
-                </div>
-                
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-col">
-                    <img src="images/logo pemkot.jpg" alt="Logo Pemkot">
-                    <img src="images/logo diskominfo.jpg" alt="Logo Diskominfo">
-                    <p>Open Data Kota Tanjungpinang</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="footer-col">
-                    <h3>Tautan Cepat</h3>
-                    <ul>
-                        <li><a href="index.html">Beranda</a></li>
-                        <li><a href="dataset.html">Dataset</a></li>
-                        <li><a href="organisasi.html">Organisasi</a></li>
-                        <li><a href="grup.html">Group</a></li>
-                        <li><a href="tentang.html">Tentang</a></li>
-                        <li><a href="ketentuan_pengguna.html">Ketentuan Pengguna</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>Kategori</h3>
-                    <ul>
-                        <li><a href="#">Kependudukan</a></li>
-                        <li><a href="#">Kesehatan</a></li>
-                        <li><a href="#">Pendidikan</a></li>
-                        <li><a href="#">Infrastruktur</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>Kontak</h3>
-                    <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> Jl. Merdeka No. 1, Tanjungpinang</li>
-                        <li><i class="fas fa-phone"></i> (0771) 123456</li>
-                        <li><i class="fas fa-envelope"></i> opendata@tanjungpinangkota.go.id</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                &copy; 2025 Open Data Tanjungpinang Created By Grayesi &copy;
-            </div>
-        </div>
-    </footer>
-    
-    <script>
-        // JavaScript untuk interaktivitas
-        document.addEventListener('DOMContentLoaded', function() {
-            // Loader
-            const loader = document.getElementById('loader');
-            setTimeout(() => {
-                loader.style.opacity = '0';
-                setTimeout(() => {
-                    loader.style.display = 'none';
-                }, 500);
-            }, 1500);
-            
-            // Toggle menu mobile
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const mainMenu = document.getElementById('mainMenu');
-            
-            mobileMenuBtn.addEventListener('click', () => {
-                mainMenu.classList.toggle('active');
-            });
-            
-            // Dark mode toggle
-            const darkModeBtn = document.getElementById('darkModeBtn');
-            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-            
-            // Cek preferensi sistem atau mode yang disimpan
-            if (localStorage.getItem('theme') === 'dark' || 
-                (!localStorage.getItem('theme') && prefersDarkScheme.matches)) {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                darkModeBtn.innerHTML = '<i class="fas fa-sun"></i>';
-            }
-            
-            darkModeBtn.addEventListener('click', () => {
-                const currentTheme = document.documentElement.getAttribute('data-theme');
-                if (currentTheme === 'dark') {
-                    document.documentElement.removeAttribute('data-theme');
-                    darkModeBtn.innerHTML = '<i class="fas fa-moon"></i>';
-                    localStorage.setItem('theme', 'light');
-                } else {
-                    document.documentElement.setAttribute('data-theme', 'dark');
-                    darkModeBtn.innerHTML = '<i class="fas fa-sun"></i>';
-                    localStorage.setItem('theme', 'dark');
-                }
-            });
-            
-            // Fungsi toast notification
-            function showToast(message) {
-                const toast = document.getElementById('toast');
-                toast.textContent = message;
-                toast.classList.add('show');
-                
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 3000);
-            }
-        });
-    </script>
-</body>
-</html>
-    <div class="loader" id="loader">
-        <div class="loader-content">
-            <div class="spinner"></div>
-            <p>Memuat Data...</p>
-        </div>
-    </div>
-
-    <div class="toast" id="toast"></div>
-
-    <header>
-        <nav>
-            <div class="logo">
-                <img src="images/logo open data.png" alt="Open Data Logo">
-            </div>
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
-            <ul id="mainMenu">
-                <li><a href="beranda.html" class="active">Beranda</a></li>
+                <li><a href="index.html" class="active">Beranda</a></li>
                 <li><a href="dataset.html">Dataset</a></li>
                 <li><a href="organisasi.html">Organisasi</a></li>
                 <li><a href="grup.html">Grup</a></li>
                 <li><a href="tentang.html">Tentang</a></li>
-                <li><a href="ketentuan pengguna.html">Ketentuan</a></li>
-            </ul>
+                <li><a href="ketentuan_pengguna.html">Ketentuan</a></li>
                 <li class="mode-toggle">
                     <button id="darkModeBtn" class="icon-toggle" aria-label="Toggle Dark Mode">
                         <i class="fas fa-moon"></i>
@@ -247,7 +50,6 @@
         <section class="hero-section">
             <h1>Satu Data Tanjungpinang</h1>
             <h2>Website Resmi Kota Tanjungpinang</h2>
-            
             <div class="search-container">
                 <div class="search-bar">
                     <input type="text" id="searchInput" placeholder="Cari dataset...">
@@ -256,7 +58,6 @@
                     </button>
                 </div>
             </div>
-            
             <div class="stats">
                 <div class="stat-item" id="datasetStat">
                     <span>0</span>
@@ -290,7 +91,7 @@
                 </div>
             </div>
         </section>
-
+        
         <section class="latest-datasets">
             <div class="container">
                 <div class="section-title">
@@ -327,8 +128,9 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-col">
-                    <img src="https://via.placeholder.com/200x50/343a40/ffffff?text=Pemkot+Tanjungpinang" alt="Pemerintah Kota Tanjungpinang" style="margin-bottom: 15px;">
-                    <p>Dinas Komunikasi dan Informatika Kota Tanjungpinang</p>
+                    <img src="images/logo pemkot.jpg" alt="Logo Pemkot">
+                    <img src="images/logo diskominfo.jpg" alt="Logo Diskominfo">
+                    <p>Open Data Kota Tanjungpinang</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -339,11 +141,12 @@
                 <div class="footer-col">
                     <h3>Tautan Cepat</h3>
                     <ul>
-                        <li><a href="#">Beranda</a></li>
-                        <li><a href="#">Dataset</a></li>
-                        <li><a href="#">Organisasi</a></li>
-                        <li><a href="#">Tentang</a></li>
-                        <li><a href="#">Ketentuan Pengguna</a></li>
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="dataset.html">Dataset</a></li>
+                        <li><a href="organisasi.html">Organisasi</a></li>
+                        <li><a href="grup.html">Grup</a></li>
+                        <li><a href="tentang.html">Tentang</a></li>
+                        <li><a href="ketentuan_pengguna.html">Ketentuan Pengguna</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -365,13 +168,14 @@
                 </div>
             </div>
             <div class="copyright">
-                &copy; 2025_Open Data Tanjungpinang Created By &copy;
+                &copy; 2025 Open Data Tanjungpinang Created By Grayesi &copy;
             </div>
         </div>
     </footer>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Logika untuk pop-up yang muncul secara default dan hilang saat menggulir
+            // Pop-up logic
             const topPopup = document.getElementById('topPopup');
             const closePopupBtn = document.getElementById('closePopupBtn');
             const scrollThreshold = 100;
@@ -390,47 +194,46 @@
                 }
             });
 
-            // --- Logika Mode Malam ---
-            const body = document.body;
+            // Dark mode logic
             const darkModeBtn = document.getElementById('darkModeBtn');
-
+            const body = document.body;
+            
             function toggleDarkMode() {
                 body.classList.toggle('dark-mode');
                 const isDarkMode = body.classList.contains('dark-mode');
                 localStorage.setItem('darkMode', isDarkMode);
-                darkModeBtn.classList.toggle('active', isDarkMode);
+                updateDarkModeIcon(isDarkMode);
+            }
+            
+            function updateDarkModeIcon(isDark) {
+                darkModeBtn.querySelector('i').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+            }
+
+            function loadUserPreferences() {
+                const isDarkMode = localStorage.getItem('darkMode') === 'true';
+                if (isDarkMode) {
+                    body.classList.add('dark-mode');
+                    updateDarkModeIcon(true);
+                }
             }
 
             darkModeBtn.addEventListener('click', toggleDarkMode);
 
-            function loadUserPreferences() {
-                const isDarkMode = localStorage.getItem('darkMode') === 'true';
-                
-                if (isDarkMode) {
-                    body.classList.add('dark-mode');
-                    darkModeBtn.classList.add('active');
-                }
-            }
-
-            // --- Akhir Logika Mode Malam ---
-
-            // Show loading screen
+            // Loader
             const loader = document.getElementById('loader');
-            loader.style.display = 'flex';
-
             setTimeout(() => {
-                initApp();
-                loader.style.display = 'none';
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                    initApp();
+                }, 500);
             }, 1500);
 
             // Mobile menu toggle
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const mainMenu = document.getElementById('mainMenu');
-
             mobileMenuBtn.addEventListener('click', function() {
                 mainMenu.classList.toggle('active');
-                this.innerHTML = mainMenu.classList.contains('active') ?
-                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
             });
 
             // Animate stats counting
@@ -464,7 +267,7 @@
             const nextBtn = document.getElementById('nextBtn');
             const carouselContainer = document.querySelector('.carousel-container');
             let autoSlideInterval;
-            const cardWidth = 280 + 20; // card-width + gap
+            let cardWidth;
             let originalCardCount = 0;
 
             const datasets = [
@@ -557,13 +360,12 @@
                 });
             }
 
-            // Fungsi untuk menggeser carousel
+            // Function to shift the carousel
             function updateCarousel() {
                 carouselTrack.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
             }
             
             function nextSlide() {
-                // Jika sudah di cloned cards, reset ke awal
                 if (currentSlide >= originalCardCount) {
                     currentSlide = 1;
                     carouselTrack.classList.add('no-transition');
@@ -578,9 +380,8 @@
             }
 
             function prevSlide() {
-                // Jika di awal, pindah ke cloned cards
                 if (currentSlide <= 0) {
-                    currentSlide = originalCardCount - 1;
+                    currentSlide = originalCardCount;
                     carouselTrack.classList.add('no-transition');
                     updateCarousel();
                     setTimeout(() => {
@@ -595,17 +396,16 @@
             }
 
             function startAutoSlide() {
-                stopAutoSlide(); // Hentikan slide yang mungkin berjalan
+                stopAutoSlide();
                 autoSlideInterval = setInterval(() => {
                     nextSlide();
-                }, 5000); // Geser setiap 5 detik
+                }, 5000);
             }
 
             function stopAutoSlide() {
                 clearInterval(autoSlideInterval);
             }
 
-            // Tambahkan event listener untuk kontrol manual dan interaksi mouse
             prevBtn.addEventListener('click', prevSlide);
             nextBtn.addEventListener('click', nextSlide);
 
@@ -627,7 +427,6 @@
             function renderCategoryCards() {
                 const categoryGrid = document.getElementById('categoryGrid');
                 categoryGrid.innerHTML = '';
-
                 categories.forEach(category => {
                     const card = document.createElement('div');
                     card.className = 'category-card';
@@ -682,6 +481,8 @@
                 animateStats();
                 renderDatasetCards();
                 renderCategoryCards();
+                
+                cardWidth = document.querySelector('.dataset-card').offsetWidth + 20; // 20 is the gap
                 updateCarousel();
                 
                 if (window.innerWidth <= 768) {
@@ -697,6 +498,8 @@
 
             // Handle window resize
             window.addEventListener('resize', function() {
+                cardWidth = document.querySelector('.dataset-card').offsetWidth + 20;
+                updateCarousel();
                 if (window.innerWidth <= 768) {
                     prevBtn.style.display = 'none';
                     nextBtn.style.display = 'none';
@@ -707,6 +510,8 @@
                     startAutoSlide();
                 }
             });
+
+            loadUserPreferences();
         });
     </script>
 </body>
