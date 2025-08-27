@@ -122,82 +122,53 @@
     </main>
 
     <footer>
-    <div class="container">
-        <div class="footer-content">
-            <div class="footer-col">
-                <img src="images/logo pemkot.jpg">
-                <img src="images/logo diskominfo.jpg">
-                <p>Open Data Kota Tanjungpinang</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                </div>
-            </div>
-            <div class="footer-col">
-                <h3>Tautan Cepat</h3>
-                <ul>
-                    <li><a href="index.html">Beranda</a></li>
-                    <li><a href="dataset.html">Dataset</a></li>
-                    <li><a href="organisasi.html">Organisasi</a></li>
-                    <li><a href="grup.html">Group</a></li>
-                    <li><a href="tentang.html">Tentang</a></li>
-                    <li><a href="ketentuan pengguna.html">Ketentuan Pengguna</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h3>Kategori</h3>
-                <ul>
-                    <li><a href="#">Kependudukan</a></li>
-                    <li><a href="#">Kesehatan</a></li>
-                    <li><a href="#">Pendidikan</a></li>
-                    <li><a href="#">Infrastruktur</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h3>Kontak</h3>
-                <ul>
-                    <li><i class="fas fa-map-marker-alt"></i> Jl. Merdeka No. 1, Tanjungpinang</li>
-                    <li><i class="fas fa-phone"></i> (0771) 123456</li>
-                    <li><i class="fas fa-envelope"></i> opendata@tanjungpinangkota.go.id</li>
-                </ul>
-            </div>
-        </div>
-        
-        <!-- Tambahkan bagian statistik pengunjung di sini -->
-        <div class="footer-stats">
-            <h3>Statistik Pengunjung</h3>
-            <div class="stats-container">
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <div class="stat-info">
-                        <span class="stat-number" id="totalVisitors">0</span>
-                        <span class="stat-label">Total Pengunjung</span>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <img src="images/logo pemkot.jpg">
+                    <img src="images/logo diskominfo.jpg">
+                    <p>Open Data Kota Tanjungpinang</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
-                <div class="stat-item">
-                    <i class="fas fa-eye"></i>
-                    <div class="stat-info">
-                        <span class="stat-number" id="todayVisitors">0</span>
-                        <span class="stat-label">Hari Ini</span>
-                    </div>
+                <div class="footer-col">
+                    <h3>Tautan Cepat</h3>
+                    <ul>
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="dataset.html">Dataset</a></li>
+                        <li><a href="organisasi.html">Organisasi</a></li>
+                        <li><a href="grup.html">Group</a></li>
+                        <li><a href="tentang.html">Tentang</a></li>
+                        <li><a href="ketentuan pengguna.html">Ketentuan Pengguna</a></li>
+                    </ul>
                 </div>
-                <div class="stat-item">
-                    <i class="fas fa-calendar-day"></i>
-                    <div class="stat-info">
-                        <span class="stat-number" id="monthVisitors">0</span>
-                        <span class="stat-label">Bulan Ini</span>
-                    </div>
+                <div class="footer-col">
+                    <h3>Kategori</h3>
+                    <ul>
+                        <li><a href="#">Kependudukan</a></li>
+                        <li><a href="#">Kesehatan</a></li>
+                        <li><a href="#">Pendidikan</a></li>
+                        <li><a href="#">Infrastruktur</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Kontak</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Jl. Merdeka No. 1, Tanjungpinang</li>
+                        <li><i class="fas fa-phone"></i> (0771) 123456</li>
+                        <li><i class="fas fa-envelope"></i> opendata@tanjungpinangkota.go.id</li>
+                    </ul>
                 </div>
             </div>
+            <div class="copyright">
+                &copy; 2025_Open Data Tanjungpinang Created By Grayesi &copy;
+            </div>
         </div>
-        
-        <div class="copyright">
-            &copy; 2025_Open Data Tanjungpinang Created By Grayesi &copy;
-        </div>
-    </div>
-</footer>
+    </footer>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -538,61 +509,6 @@
                 }
             });
         });
-
-        // Visitor counter functionality
-function updateVisitorStats() {
-    // Get current date info
-    const today = new Date().toDateString();
-    const currentMonth = new Date().getMonth() + '-' + new Date().getFullYear();
-    
-    // Get stored data or initialize
-    let totalVisits = parseInt(localStorage.getItem('totalVisits')) || 0;
-    let todayVisits = parseInt(localStorage.getItem('todayVisits')) || 0;
-    let monthVisits = parseInt(localStorage.getItem('monthVisits')) || 0;
-    let lastVisitDate = localStorage.getItem('lastVisitDate');
-    let lastVisitMonth = localStorage.getItem('lastVisitMonth');
-    
-    // Increment total visits
-    totalVisits++;
-    localStorage.setItem('totalVisits', totalVisits);
-    
-    // Check if this is a new day
-    if (lastVisitDate !== today) {
-        todayVisits = 1;
-        localStorage.setItem('todayVisits', todayVisits);
-        localStorage.setItem('lastVisitDate', today);
-    } else {
-        todayVisits++;
-        localStorage.setItem('todayVisits', todayVisits);
-    }
-    
-    // Check if this is a new month
-    if (lastVisitMonth !== currentMonth) {
-        monthVisits = 1;
-        localStorage.setItem('monthVisits', monthVisits);
-        localStorage.setItem('lastVisitMonth', currentMonth);
-    } else {
-        monthVisits++;
-        localStorage.setItem('monthVisits', monthVisits);
-    }
-    
-    // Update the display
-    document.getElementById('totalVisitors').textContent = totalVisits.toLocaleString();
-    document.getElementById('todayVisitors').textContent = todayVisits.toLocaleString();
-    document.getElementById('monthVisitors').textContent = monthVisits.toLocaleString();
-}
-
-// Panggil fungsi ini di dalam initApp()
-function initApp() {
-    loadUserPreferences();
-    animateStats();
-    renderDatasetCards();
-    renderCategoryCards();
-    updateCarousel();
-    updateVisitorStats(); // Tambahkan ini
-    
-    // ... kode lainnya
-}
     </script>
 </body>
 </html>

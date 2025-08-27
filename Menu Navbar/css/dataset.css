@@ -15,14 +15,13 @@
     --input-border: #ccc;
 }
 
-/* CSS untuk Mode Malam (Disesuaikan untuk kontras dan keseragaman yang lebih baik) */
 body.dark-mode {
-    --primary: #3498db; /* Biru yang lebih terang */
-    --secondary: #2980b9; /* Biru yang lebih tua */
-    --accent: #2ecc71; /* Hijau terang */
+    --primary: #e7776f; /* Biru yang lebih terang */
+    --secondary: #e7776f; /* Biru yang lebih tua */
+    --accent: #ec6b5a; /* Hijau terang */
     --light: #34495e;
     --dark: #ecf0f1;
-    --success: #2ecc71;
+    --success: #cc4e2e;
     --bg-body: #1e2a38; /* Lebih gelap dari sebelumnya */
     --bg-card: #2c3e50; /* Jelas berbeda dari bg-body */
     --text-color: #f8f9fa; /* Teks utama putih terang */
