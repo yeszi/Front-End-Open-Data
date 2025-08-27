@@ -8,11 +8,18 @@
     <link rel="stylesheet" href="C:\Front-End-Open-Data\Front-End-Open-Data\Menu Navbar\css\organisasi.css">
 </head>
 <body>
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <p>Memuat Data...</p>
+        </div>
+    </div>
+    <div class="toast" id="toast"></div>
 
     <header>
         <nav>
             <div class="logo">
-                <img src="images/logo open data.png" alt="Open Data Logo">
+                <img src="images/opendata tg.png" alt="Open Data Logo">
             </div>
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
@@ -34,23 +41,18 @@
     </header>
 
     <main>
-        <section class="page-hero">
+        <section class="organizations-section">
             <div class="container">
-                <h1>Organisasi</h1>
-                <p>Jelajahi dataset berdasarkan organisasi pengelola.</p>
-                <div class="search-bar-small">
-                    <input type="text" id="searchInput" placeholder="Cari organisasi...">
-                    <button id="searchBtn">
-                        <i class="fas fa-search"></i>
-                    </button>
+                <div class="section-title">
+                    <h2>Organisasi</h2>
                 </div>
-            </div>
-        </section>
-
-        <section class="organization-list">
-            <div class="container">
-                <div class="organization-grid" id="orgGrid">
-                    </div>
+                <div class="org-search-container">
+                    <input type="text" id="orgSearchInput" placeholder="Cari organisasi...">
+                    <button id="orgSearchBtn"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="organizations-grid" id="organizationsGrid">
+                    <!-- Data organisasi akan dimuat di sini -->
+                </div>
             </div>
         </section>
     </main>
@@ -75,6 +77,7 @@
                         <li><a href="index.html">Beranda</a></li>
                         <li><a href="dataset.html">Dataset</a></li>
                         <li><a href="organisasi.html">Organisasi</a></li>
+                        <li><a href="grup.html">Group</a></li>
                         <li><a href="tentang.html">Tentang</a></li>
                         <li><a href="ketentuan pengguna.html">Ketentuan Pengguna</a></li>
                     </ul>
@@ -104,130 +107,150 @@
     </footer>
     
     <script>
+        // JavaScript untuk interaktivitas
         document.addEventListener('DOMContentLoaded', function() {
-            // Function to load and apply dark mode preference
-            function loadUserPreferences() {
-                const isDarkMode = localStorage.getItem('darkMode') === 'true';
-                if (isDarkMode) {
-                    document.body.classList.add('dark-mode');
-                    const darkModeBtn = document.getElementById('darkModeBtn');
-                    if (darkModeBtn) {
-                        darkModeBtn.classList.add('active');
-                    }
-                }
+            // Loader
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 500);
+            }, 1500);
+            
+            // Toggle menu mobile
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainMenu = document.getElementById('mainMenu');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                mainMenu.classList.toggle('active');
+            });
+            
+            // Dark mode toggle
+            const darkModeBtn = document.getElementById('darkModeBtn');
+            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+            
+            // Cek preferensi sistem atau mode yang disimpan
+            if (localStorage.getItem('theme') === 'dark' || 
+                (!localStorage.getItem('theme') && prefersDarkScheme.matches)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                darkModeBtn.innerHTML = '<i class="fas fa-sun"></i>';
             }
-
-            // Function to handle dark mode toggle
-            function setupDarkModeToggle() {
-                const darkModeBtn = document.getElementById('darkModeBtn');
-                if (darkModeBtn) {
-                    darkModeBtn.addEventListener('click', function() {
-                        document.body.classList.toggle('dark-mode');
-                        const isDarkMode = document.body.classList.contains('dark-mode');
-                        localStorage.setItem('darkMode', isDarkMode);
-                        this.classList.toggle('active', isDarkMode);
-                    });
+            
+            darkModeBtn.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                if (currentTheme === 'dark') {
+                    document.documentElement.removeAttribute('data-theme');
+                    darkModeBtn.innerHTML = '<i class="fas fa-moon"></i>';
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    darkModeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+                    localStorage.setItem('theme', 'dark');
                 }
+            });
+            
+            // Pencarian organisasi
+            const orgSearchInput = document.getElementById('orgSearchInput');
+            const orgSearchBtn = document.getElementById('orgSearchBtn');
+            
+            orgSearchBtn.addEventListener('click', searchOrganizations);
+            orgSearchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    searchOrganizations();
+                }
+            });
+            
+            function searchOrganizations() {
+                const searchTerm = orgSearchInput.value.toLowerCase();
+                showToast(`Mencari: ${searchTerm}`);
+                // Di sini akan ditambahkan logika pencarian yang sesungguhnya
             }
-
-            // Data for organizations
-            const organizations = [
+            
+            // Fungsi toast notification
+            function showToast(message) {
+                const toast = document.getElementById('toast');
+                toast.textContent = message;
+                toast.classList.add('show');
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+            
+            // Memuat data organisasi (contoh data)
+            const organizationsGrid = document.getElementById('organizationsGrid');
+            const sampleOrganizations = [
                 {
-                    name: "Dinas Kependudukan",
-                    datasets: 324,
-                    description: "Menyediakan data terkait administrasi kependudukan dan pencatatan sipil.",
-                    image: "https://images.unsplash.com/photo-1596551381387-f273523f6630?q=80&w=1470&auto=format&fit=crop"
+                    name: "Dinas Komunikasi dan Informatika",
+                    description: "Mengelola data dan informasi pemerintahan Kota Tanjungpinang",
+                    datasets: 42,
+                    groups: 5
                 },
                 {
                     name: "Dinas Kesehatan",
-                    datasets: 156,
-                    description: "Data dan informasi seputar fasilitas, program, dan statistik kesehatan masyarakat.",
-                    image: "https://images.unsplash.com/photo-1538108149393-7decde758fd0?q=80&w=1470&auto=format&fit=crop"
+                    description: "Mengelola data kesehatan dan fasilitas kesehatan di Tanjungpinang",
+                    datasets: 28,
+                    groups: 3
                 },
                 {
                     name: "Dinas Pendidikan",
-                    datasets: 98,
-                    description: "Informasi mengenai data sekolah, siswa, guru, dan program pendidikan di kota.",
-                    image: "https://images.unsplash.com/photo-1543269865-cbf42730129a?q=80&w=1470&auto=format&fit=crop"
+                    description: "Mengelola data pendidikan dan sekolah di Tanjungpinang",
+                    datasets: 35,
+                    groups: 4
                 },
                 {
                     name: "Dinas Pekerjaan Umum",
-                    datasets: 210,
-                    description: "Data infrastruktur publik seperti jaringan jalan, drainase, dan fasilitas umum lainnya.",
-                    image: "https://images.unsplash.com/photo-1493069395279-b8830f30c90c?q=80&w=1470&auto=format&fit=crop"
+                    description: "Mengelola data infrastruktur dan tata kota Tanjungpinang",
+                    datasets: 31,
+                    groups: 2
                 },
                 {
-                    name: "Dinas Perdagangan",
-                    datasets: 187,
-                    description: "Menyediakan data terkait kegiatan ekonomi, pasar, dan harga komoditas.",
-                    image: "https://images.unsplash.com/photo-1557850024-4f05788874bb?q=80&w=1470&auto=format&fit=crop"
+                    name: "Badan Pusat Statistik",
+                    description: "Menyediakan data statistik Kota Tanjungpinang",
+                    datasets: 56,
+                    groups: 6
                 },
                 {
-                    name: "Dinas Pariwisata",
-                    datasets: 89,
-                    description: "Data destinasi wisata, jumlah pengunjung, dan informasi terkait sektor pariwisata.",
-                    image: "https://images.unsplash.com/photo-1622770243438-e737c385c7d8?q=80&w=1470&auto=format&fit=crop"
+                    name: "Dinas Perhubungan",
+                    description: "Mengelola data transportasi dan lalu lintas Tanjungpinang",
+                    datasets: 22,
+                    groups: 3
                 }
             ];
-
-            // Function to render organization cards
-            function renderOrganizationCards(orgs) {
-                const orgGrid = document.getElementById('orgGrid');
-                orgGrid.innerHTML = '';
-                if (orgs.length === 0) {
-                    orgGrid.innerHTML = '<p class="no-results">Tidak ada organisasi yang ditemukan.</p>';
-                    return;
-                }
+            
+            // Render organisasi
+            function renderOrganizations(organizations) {
+                organizationsGrid.innerHTML = '';
                 
-                orgs.forEach(org => {
-                    const card = document.createElement('div');
-                    card.className = 'organization-card';
-                    card.innerHTML = `
-                        <div class="org-card-image">
-                            <img src="${org.image}" alt="${org.name}">
+                organizations.forEach(org => {
+                    const orgCard = document.createElement('div');
+                    orgCard.className = 'organization-card';
+                    
+                    orgCard.innerHTML = `
+                        <div class="org-logo">
+                            <img src="images/org-placeholder.png" alt="${org.name}">
                         </div>
-                        <div class="org-card-content">
-                            <h3 class="org-card-title">${org.name}</h3>
-                            <p class="org-card-desc">${org.description}</p>
-                            <p class="org-card-count">${org.datasets} dataset tersedia</p>
-                            <a href="#" class="org-card-link">Lihat Dataset</a>
+                        <h3 class="org-name">${org.name}</h3>
+                        <p class="org-description">${org.description}</p>
+                        <div class="org-stats">
+                            <div class="stat-item">
+                                <div class="count">${org.datasets}</div>
+                                <div class="label">Dataset</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="count">${org.groups}</div>
+                                <div class="label">Grup</div>
+                            </div>
                         </div>
                     `;
-                    orgGrid.appendChild(card);
+                    
+                    organizationsGrid.appendChild(orgCard);
                 });
             }
-
-            // Function to handle search
-            function handleSearch() {
-                const query = document.getElementById('searchInput').value.toLowerCase();
-                const filteredOrgs = organizations.filter(org => 
-                    org.name.toLowerCase().includes(query) || 
-                    org.description.toLowerCase().includes(query)
-                );
-                renderOrganizationCards(filteredOrgs);
-            }
-
-            // Initial setup
-            loadUserPreferences();
-            setupDarkModeToggle();
-            renderOrganizationCards(organizations);
-
-            // Add event listeners for search
-            document.getElementById('searchBtn').addEventListener('click', handleSearch);
-            document.getElementById('searchInput').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') handleSearch();
-            });
             
-            // Mobile menu toggle
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const mainMenu = document.getElementById('mainMenu');
-            if (mobileMenuBtn) {
-                mobileMenuBtn.addEventListener('click', function() {
-                    mainMenu.classList.toggle('active');
-                    this.innerHTML = mainMenu.classList.contains('active') ?
-                        '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-                });
-            }
+            // Render data contoh
+            renderOrganizations(sampleOrganizations);
         });
     </script>
 </body>
