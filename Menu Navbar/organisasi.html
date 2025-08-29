@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Organisasi - Open Data Tanjungpinang</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="C:\Front-End-Open-Data\Front-End-Open-Data\Menu Navbar\css\organisasi.css">
+    <link rel="stylesheet"href="C:\Front-End-Open-Data\Front-End-Open-Data\Menu Navbar\css\organisasi.css">    
 </head>
 <body>
     <div class="loader" id="loader">
@@ -19,7 +19,8 @@
     <header>
         <nav>
             <div class="logo">
-                <img src="images/opendata tg.png" alt="Open Data Logo">
+                <img src="https://via.placeholder.com/40x40/ED2B2A/FFFFFF?text=OD" alt="Open Data Logo">
+                <span class="logo-text">Open Data Tanjungpinang</span>
             </div>
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
@@ -30,7 +31,7 @@
                 <li><a href="organisasi.html" class="active">Organisasi</a></li>
                 <li><a href="grup.html">Grup</a></li>
                 <li><a href="tentang.html">Tentang</a></li>
-                <li><a href="ketentuan pengguna.html">Ketentuan</a></li>
+                <li><a href="ketentuan-pengguna.html">Ketentuan</a></li>
                 <li class="mode-toggle">
                     <button id="darkModeBtn" class="icon-toggle" aria-label="Toggle Dark Mode">
                         <i class="fas fa-moon"></i>
@@ -61,8 +62,8 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-col">
-                    <img src="images/logo pemkot.jpg" alt="Logo Pemkot">
-                    <img src="images/logo diskominfo.jpg" alt="Logo Diskominfo">
+                    <img src="https://via.placeholder.com/100x50/CD1818/FFFFFF?text=Pemkot" alt="Logo Pemerintah Kota Tanjungpinang">
+                    <img src="https://via.placeholder.com/100x50/ED2B2A/FFFFFF?text=Diskominfo" alt="Logo Diskominfo Tanjungpinang">
                     <p>Open Data Kota Tanjungpinang</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -79,7 +80,7 @@
                         <li><a href="organisasi.html">Organisasi</a></li>
                         <li><a href="grup.html">Group</a></li>
                         <li><a href="tentang.html">Tentang</a></li>
-                        <li><a href="ketentuan pengguna.html">Ketentuan Pengguna</a></li>
+                        <li><a href="ketentuan-pengguna.html">Ketentuan Pengguna</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -101,7 +102,7 @@
                 </div>
             </div>
             <div class="copyright">
-                &copy; 2025_Open Data Tanjungpinang Created By Grayesi &copy;
+                &copy; 2025 Open Data Tanjungpinang Created By Grayesi &copy;
             </div>
         </div>
     </footer>
@@ -124,31 +125,39 @@
             
             mobileMenuBtn.addEventListener('click', () => {
                 mainMenu.classList.toggle('active');
+                mobileMenuBtn.innerHTML = mainMenu.classList.contains('active') ? 
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
             });
             
             // Dark mode toggle
             const darkModeBtn = document.getElementById('darkModeBtn');
-            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+            const body = document.body;
             
-            // Cek preferensi sistem atau mode yang disimpan
-            if (localStorage.getItem('theme') === 'dark' || 
-                (!localStorage.getItem('theme') && prefersDarkScheme.matches)) {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                darkModeBtn.innerHTML = '<i class="fas fa-sun"></i>';
-            }
-            
-            darkModeBtn.addEventListener('click', () => {
-                const currentTheme = document.documentElement.getAttribute('data-theme');
-                if (currentTheme === 'dark') {
-                    document.documentElement.removeAttribute('data-theme');
-                    darkModeBtn.innerHTML = '<i class="fas fa-moon"></i>';
-                    localStorage.setItem('theme', 'light');
-                } else {
-                    document.documentElement.setAttribute('data-theme', 'dark');
+            function toggleDarkMode() {
+                body.classList.toggle('dark-mode');
+                const isDarkMode = body.classList.contains('dark-mode');
+                localStorage.setItem('darkMode', isDarkMode);
+                darkModeBtn.classList.toggle('active', isDarkMode);
+                
+                // Ganti ikon mode gelap/terang
+                if (isDarkMode) {
                     darkModeBtn.innerHTML = '<i class="fas fa-sun"></i>';
-                    localStorage.setItem('theme', 'dark');
+                } else {
+                    darkModeBtn.innerHTML = '<i class="fas fa-moon"></i>';
                 }
-            });
+            }
+
+            darkModeBtn.addEventListener('click', toggleDarkMode);
+
+            function loadUserPreferences() {
+                const isDarkMode = localStorage.getItem('darkMode') === 'true';
+                
+                if (isDarkMode) {
+                    body.classList.add('dark-mode');
+                    darkModeBtn.classList.add('active');
+                    darkModeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+                }
+            }
             
             // Pencarian organisasi
             const orgSearchInput = document.getElementById('orgSearchInput');
@@ -185,37 +194,37 @@
                     name: "Dinas Komunikasi dan Informatika",
                     description: "Mengelola data dan informasi pemerintahan Kota Tanjungpinang",
                     datasets: 42,
-                    groups: 5
+                    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
                 },
                 {
                     name: "Dinas Kesehatan",
                     description: "Mengelola data kesehatan dan fasilitas kesehatan di Tanjungpinang",
                     datasets: 28,
-                    groups: 3
+                    image: "https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
                 },
                 {
                     name: "Dinas Pendidikan",
                     description: "Mengelola data pendidikan dan sekolah di Tanjungpinang",
                     datasets: 35,
-                    groups: 4
+                    image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
                 },
                 {
                     name: "Dinas Pekerjaan Umum",
                     description: "Mengelola data infrastruktur dan tata kota Tanjungpinang",
                     datasets: 31,
-                    groups: 2
+                    image: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
                 },
                 {
                     name: "Badan Pusat Statistik",
                     description: "Menyediakan data statistik Kota Tanjungpinang",
                     datasets: 56,
-                    groups: 6
+                    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
                 },
                 {
                     name: "Dinas Perhubungan",
                     description: "Mengelola data transportasi dan lalu lintas Tanjungpinang",
                     datasets: 22,
-                    groups: 3
+                    image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
                 }
             ];
             
@@ -229,7 +238,7 @@
                     
                     orgCard.innerHTML = `
                         <div class="org-logo">
-                            <img src="images/org-placeholder.png" alt="${org.name}">
+                            <img src="${org.image}" alt="${org.name}">
                         </div>
                         <h3 class="org-name">${org.name}</h3>
                         <p class="org-description">${org.description}</p>
@@ -238,10 +247,6 @@
                                 <div class="count">${org.datasets}</div>
                                 <div class="label">Dataset</div>
                             </div>
-                            <div class="stat-item">
-                                <div class="count">${org.groups}</div>
-                                <div class="label">Grup</div>
-                            </div>
                         </div>
                     `;
                     
@@ -249,8 +254,13 @@
                 });
             }
             
-            // Render data contoh
-            renderOrganizations(sampleOrganizations);
+            // Initialize the app
+            function initApp() {
+                loadUserPreferences();
+                renderOrganizations(sampleOrganizations);
+            }
+            
+            initApp();
         });
     </script>
 </body>
