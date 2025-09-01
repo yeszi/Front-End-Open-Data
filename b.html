@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dataset - Open Data Tanjungpinang</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="C:\Front-End-Open-Data\Front-End-Open-Data\Menu Navbar\css\dataset.css">
+</head>
+<style>
+ /* Gaya dasar yang sudah ada */
+        :root {
+            --primary: #d13e3e;
+            --secondary: #CD1818;
+            --accent: #ED2B2A;
+            --light: #e7776f;
+            --dark: #343a30;
+            --success: #28a745;
+            --bg-body: #db8a7c;
+            --bg-card: white;
+            --text-color: #333;
+            --text-muted: #666;
+            --header-bg: var(--primary);
+            --header-text: white;
+            --input-bg: white;
+            --input-border: #ccc;
+        }
+
+        body.dark-mode {
+            --primary: #e7776f;
+            --secondary: #e7776f;
+            --accent: #ec6b5a;
+            --light: #34495e;
+            --dark: #ecf0f1;
+            --success: #cc4e2e;
+            --bg-body: #1e2a38;
+            --bg-card: #2c3e50;
+            --text-color: #f8f9fa;
+            --text-muted: #b0bec5;
+            --header-bg: #1e2a38;
+            --header-text: #f8f9fa;
+            --input-bg: #34495e;
+            --input-border: #4a647a;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        /* Header dan navigasi (tetap sama) */
+        header {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 40px;
+            transition: transform 0.3s;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+        }
+
+        nav ul li a {
+            color: var(--header-text);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        .mode-toggle {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .mode-toggle .icon-toggle {
+            background: none;
+            border: 1px solid var(--header-text);
+            color: var(--header-text);
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+        }
+        
+        body.dark-mode .mode-toggle .icon-toggle {
+            color: var(--dark);
+            border-color: var(--dark);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--header-text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .dataset-page {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .page-header {
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            font-size: 2.2rem;
+            color: var(--text-color);
+            margin-bottom: 10px;
+        }
+
+        .page-description {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 800px;
+        }
+
+        /* Filter dan kontrol dataset */
+        .dataset-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .search-filter {
+            display: flex;
+            gap: 10px;
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .search-filter input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid var(--input-border);
+            border-radius: 4px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            padding: 12px 20px;
+            background-color: var(--bg-card);
+            border: 1px solid var(--input-border);
+            border-radius: 4px;
+            color: var(--text-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover {
+            background-color: var(--light);
+            color: white;
+        }
+
+        .filter-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .sort-dropdown {
+            position: relative;
+        }
+
+        .sort-btn {
+            padding: 12px 20px;
+            background-color: var(--bg-card);
+            border: 1px solid var(--input-border);
+            border-radius: 4px;
+            color: var(--text-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 180px;
+            justify-content: space-between;
+        }
+
+        .sort-options {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: var(--bg-card);
+            border: 1px solid var(--input-border);
+            border-radius: 4px;
+            margin-top: 5px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 100;
+            display: none;
+            overflow: hidden;
+        }
+
+        .sort-options.show {
+            display: block;
+        }
+
+        .sort-option {
+            padding: 12px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .sort-option:hover {
+            background-color: var(--light);
+            color: white;
+        }
+
+        /* Grid dataset */
+        .dataset-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .dataset-card {
+            background-color: var(--bg-card);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .dataset-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        .card-header {
+            position: relative;
+        }
+
+        .card-image {
+            height: 160px;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .dataset-card:hover .card-image img {
+            transform: scale(1.05);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .status-indicator {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .status-updated {
+            background-color: var(--success);
+        }
+
+        .status-outdated {
+            background-color: #ffc107;
+        }
+
+        .card-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--text-color);
+            line-height: 1.4;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .card-org {
+            font-weight: 500;
+        }
+
+        .card-date {
+            font-style: italic;
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        .card-stats {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--text-muted);
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .card-btn {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Gaya untuk pesan 'tidak ada hasil' */
+        .no-results {
+            text-align: center;
+            margin-top: 50px;
+            grid-column: 1 / -1; /* Mengambil seluruh lebar grid */
+            color: var(--text-muted);
+        }
+        
+        .no-results h3 {
+            color: var(--text-color);
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 40px;
+        }
+
+        .page-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .page-link {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            background-color: var(--bg-card);
+            color: var(--text-color);
+            text-decoration: none;
+            border: 1px solid var(--input-border);
+            transition: all 0.3s;
+        }
+
+        .page-link:hover {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .page-link.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .page-link.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Footer (tetap sama) */
+        footer {
+            background-color: #f8f9fa;
+            padding: 40px 0 20px;
+            color: #333;
+            font-size: 14px;
+            transition: background-color 0.5s, color 0.5s;
+            margin-top: 60px;
+        }
+
+        body.dark-mode footer {
+            background-color: var(--header-bg);
+            color: var(--dark);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 20px;
+        }
+
+        .footer-col img {
+            height: 60px;
+            margin-bottom: 15px;
+        }
+
+        .footer-col .social-links a {
+            color: inherit;
+            margin-right: 15px;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .footer-col .social-links a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            font-size: 13px;
+            color: #777;
+            max-width: 1200px;
+            margin: 30px auto 0;
+            padding: 20px 20px 0;
+        }
+
+        /* Responsive design */
+        @media (max-width: 992px) {
+            .dataset-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-filter {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--header-bg);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                gap: 15px;
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+                z-index: 999;
+            }
+
+            nav ul.active {
+                transform: translateY(0);
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .dataset-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-buttons {
+                flex-wrap: wrap;
+            }
+        }
+
+        /* Animasi */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+</style>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="../images/opendata tg.png" alt="Open Data Logo">
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul id="mainMenu">
+                <li><a href="../index.html">Beranda</a></li>
+                <li><a href="dataset.html"class="active">Dataset</a></li>
+                <li><a href="organisasi.html">Organisasi</a></li>
+                <li><a href="grup.html">Grup</a></li>
+                <li><a href="tentang.html">Tentang</a></li>
+                <li><a href="ketentuan pengguna.html">Ketentuan</a></li>
+            </ul>
+            <div class="mode-toggle">
+                <button id="darkModeBtn" class="icon-toggle" aria-label="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="breadcrumb">
+        <a href="index.html">Beranda</a> > <span>Dataset</span>
+    </div>
+
+    <main class="dataset-page">
+        <div class="page-header">
+            <h1>Kumpulan Dataset Terbuka</h1>
+            <p class="page-description">
+                Jelajahi berbagai dataset terbuka dari Pemerintah Kota Tanjungpinang. 
+                Data dapat diunduh dan digunakan sesuai ketentuan yang berlaku.
+            </p>
+        </div>
+
+        <div class="dataset-controls">
+            <div class="search-filter">
+                <input type="text" id="datasetSearch" placeholder="Cari dataset...">
+                <button class="filter-btn" id="searchBtn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            
+            <div class="filter-buttons">
+                <div class="sort-dropdown">
+                    <button class="sort-btn" id="sortBtn">
+                        <span>Urutkan: Terbaru</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="sort-options" id="sortOptions">
+                        <div class="sort-option" data-sort="newest">Terbaru</div>
+                        <div class="sort-option" data-sort="oldest">Terlama</div>
+                        <div class="sort-option" data-sort="popular">Populer</div>
+                        <div class="sort-option" data-sort="az">A-Z</div>
+                        <div class="sort-option" data-sort="za">Z-A</div>
+                    </div>
+                </div>
+                
+                <button class="filter-btn" id="filterBtn">
+                    <i class="fas fa-filter"></i>
+                    Filter
+                </button>
+            </div>
+        </div>
+
+        <div class="dataset-grid" id="datasetGrid">
+            </div>
+
+        <div class="pagination" id="pagination">
+            </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <img src="../images/logo pemkot.jpg" alt="Logo Pemkot">
+                <img src="../images/logo diskominfo.jpg" alt="Logo Diskominfo">
+                <p>Open Data Kota Tanjungpinang</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Tautan Cepat</h3>
+                <ul>
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="dataset.html">Dataset</a></li>
+                    <li><a href="organisasi.html">Organisasi</a></li>
+                    <li><a href="grup.html">Group</a></li>
+                    <li><a href="tentang.html">Tentang</a></li>
+                    <li><a href="ketentuan pengguna.html">Ketentuan Pengguna</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Kategori</h3>
+                <ul>
+                    <li><a href="#">Kependudukan</a></li>
+                    <li><a href="#">Kesehatan</a></li>
+                    <li><a href="#">Pendidikan</a></li>
+                    <li><a href="#">Infrastruktur</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Kontak</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Jl. Merdeka No. 1, Tanjungpinang</li>
+                    <li><i class="fas fa-phone"></i> (0771) 123456</li>
+                    <li><i class="fas fa-envelope"></i> opendata@tanjungpinangkota.go.id</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 Open Data Tanjungpinang Created By Grayesi &copy;
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Data contoh dataset
+            const datasets = [
+                {
+                    id: 1,
+                    title: "Data Kependudukan 2023",
+                    category: "Kependudukan",
+                    org: "Dinas Kependudukan",
+                    date: "15 Jun 2023",
+                    desc: "Data demografi penduduk Kota Tanjungpinang tahun 2023 meliputi jumlah penduduk, distribusi usia, dan kepadatan penduduk per kecamatan.",
+                    image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                    downloads: 243,
+                    views: 512,
+                    format: "CSV",
+                    size: "2.4 MB",
+                    updated: true
+                },
+                {
+                    id: 2,
+                    title: "Fasilitas Kesehatan",
+                    category: "Kesehatan",
+                    org: "Dinas Kesehatan",
+                    date: "10 Mei 2023",
+                    desc: "Daftar fasilitas kesehatan di Kota Tanjungpinang termasuk rumah sakit, puskesmas, dan klinik dengan informasi lokasi dan fasilitas yang tersedia.",
+                    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                    downloads: 187,
+                    views: 423,
+                    format: "XLSX",
+                    size: "1.2 MB",
+                    updated: true
+                },
+                {
+                    id: 3,
+                    title: "Sekolah dan Madrasah",
+                    category: "Pendidikan",
+                    org: "Dinas Pendidikan",
+                    date: "28 Apr 2023",
+                    desc: "Data sekolah dan madrasah di Kota Tanjungpinang meliputi informasi lokasi, jumlah siswa, dan fasilitas pendidikan yang tersedia.",
+                    image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                    downloads: 156,
+                    views: 387,
+                    format: "CSV",
+                    size: "1.8 MB",
+                    updated: false
+                },
+                {
+                    id: 4,
+                    title: "Jaringan Jalan",
+                    category: "Infrastruktur",
+                    org: "Dinas PUPR",
+                    date: "12 Apr 2023",
+                    desc: "Data jaringan jalan Kota Tanjungpinang termasuk kondisi jalan, panjang, lebar, dan status jalan (nasional, provinsi, kabupaten).",
+                    image: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1413&q=80",
+                    downloads: 132,
+                    views: 298,
+                    format: "SHP",
+                    size: "4.5 MB",
+                    updated: true
+                },
+                {
+                    id: 5,
+                    title: "Pasar Tradisional",
+                    category: "Ekonomi",
+                    org: "Dinas Perdagangan",
+                    date: "5 Mar 2023",
+                    desc: "Lokasi dan data pasar tradisional di Kota Tanjungpinang termasuk jumlah pedagang, jenis komoditas, dan luas area.",
+                    image: "https://images.unsplash.com/photo-1580828343064-fde4fc206bc6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80",
+                    downloads: 98,
+                    views: 245,
+                    format: "CSV",
+                    size: "0.9 MB",
+                    updated: true
+                },
+                {
+                    id: 6,
+                    title: "Data Iklim dan Cuaca 2023",
+                    category: "Lingkungan",
+                    org: "Dinas Lingkungan Hidup",
+                    date: "20 Feb 2023",
+                    desc: "Data iklim dan cuaca harian Kota Tanjungpinang tahun 2023 meliputi suhu, kelembaban, curah hujan, dan kecepatan angin.",
+                    image: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1465&q=80",
+                    downloads: 176,
+                    views: 324,
+                    format: "CSV",
+                    size: "3.2 MB",
+                    updated: false
+                },
+                {
+                    id: 7,
+                    title: "Potensi Pariwisata",
+                    category: "Pariwisata",
+                    org: "Dinas Pariwisata",
+                    date: "8 Feb 2023",
+                    desc: "Data potensi pariwisata Kota Tanjungpinang termasuk objek wisata, jumlah pengunjung, dan fasilitas pendukung pariwisata.",
+                    image: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                    downloads: 214,
+                    views: 467,
+                    format: "PDF",
+                    size: "5.1 MB",
+                    updated: true
+                },
+                {
+                    id: 8,
+                    title: "Data UMKM Terdaftar",
+                    category: "Ekonomi",
+                    org: "Dinas Koperasi dan UKM",
+                    date: "25 Jan 2023",
+                    desc: "Data Usaha Mikro, Kecil dan Menengah (UMKM) terdaftar di Kota Tanjungpinang meliputi jenis usaha, omzet, dan jumlah tenaga kerja.",
+                    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                    downloads: 198,
+                    views: 412,
+                    format: "XLSX",
+                    size: "2.7 MB",
+                    updated: true
+                },
+                {
+                    id: 9,
+                    title: "Peta Batas Administrasi",
+                    category: "Infrastruktur",
+                    org: "Dinas Komunikasi dan Informatika",
+                    date: "17 Jan 2023",
+                    desc: "Data geospasial batas wilayah administrasi kecamatan dan kelurahan di Kota Tanjungpinang.",
+                    image: "https://images.unsplash.com/photo-1533720743609-b6846938a163?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                    downloads: 310,
+                    views: 654,
+                    format: "KML",
+                    size: "3.5 MB",
+                    updated: true
+                },
+                {
+                    id: 10,
+                    title: "Laporan Angka Kelahiran",
+                    category: "Kependudukan",
+                    org: "Dinas Kependudukan",
+                    date: "10 Jan 2023",
+                    desc: "Laporan tahunan angka kelahiran di Kota Tanjungpinang, dikelompokkan berdasarkan jenis kelamin dan kecamatan.",
+                    image: "https://images.unsplash.com/photo-1517404215738-15263e9f9178?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                    downloads: 85,
+                    views: 199,
+                    format: "PDF",
+                    size: "1.1 MB",
+                    updated: false
+                }
+            ];
+
+            // Variabel global
+            let currentPage = 1;
+            const itemsPerPage = 6;
+            let filteredDatasets = [...datasets].sort((a, b) => b.id - a.id); // Default sort: terbaru
+            let currentSort = 'newest';
+            
+            // Elemen DOM
+            const datasetGrid = document.getElementById('datasetGrid');
+            const pagination = document.getElementById('pagination');
+            const searchInput = document.getElementById('datasetSearch');
+            const searchBtn = document.getElementById('searchBtn');
+            const sortBtn = document.getElementById('sortBtn');
+            const sortBtnText = sortBtn.querySelector('span');
+            const sortOptions = document.getElementById('sortOptions');
+            const filterBtn = document.getElementById('filterBtn');
+            const darkModeBtn = document.getElementById('darkModeBtn');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainMenu = document.getElementById('mainMenu');
+
+            // --- Fungsionalitas Utama ---
+
+            // Render dataset cards
+            function renderDatasets() {
+                datasetGrid.innerHTML = '';
+                
+                const startIndex = (currentPage - 1) * itemsPerPage;
+                const endIndex = startIndex + itemsPerPage;
+                const datasetsToRender = filteredDatasets.slice(startIndex, endIndex);
+                
+                if (datasetsToRender.length === 0) {
+                    datasetGrid.innerHTML = `
+                        <div class="no-results">
+                            <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                            <h3>Tidak ada dataset yang ditemukan</h3>
+                            <p>Coba gunakan kata kunci lain atau lihat semua dataset</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                datasetsToRender.forEach(dataset => {
+                    const card = document.createElement('div');
+                    card.className = 'dataset-card fade-in';
+                    card.innerHTML = `
+                        <div class="card-header">
+                            <div class="card-image">
+                                <img src="${dataset.image}" alt="${dataset.title}">
+                            </div>
+                            <span class="card-badge">${dataset.category}</span>
+                            <div class="status-indicator ${dataset.updated ? 'status-updated' : 'status-outdated'}"></div>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">${dataset.title}</h3>
+                            <div class="card-meta">
+                                <span class="card-org">${dataset.org}</span>
+                                <span class="card-date">${dataset.date}</span>
+                            </div>
+                            <p class="card-desc">${dataset.desc}</p>
+                            <div class="card-stats">
+                                <div class="stat">
+                                    <i class="fas fa-download"></i>
+                                    <span>${dataset.downloads}</span>
+                                </div>
+                                <div class="stat">
+                                    <i class="fas fa-eye"></i>
+                                    <span>${dataset.views}</span>
+                                </div>
+                                <div class="stat">
+                                    <i class="fas fa-file"></i>
+                                    <span>${dataset.format}</span>
+                                </div>
+                            </div>
+                            <div class="card-actions">
+                                <a href="#" class="card-btn btn-primary" data-id="${dataset.id}">
+                                    <i class="fas fa-download"></i> Unduh
+                                </a>
+                                <a href="#" class="card-btn btn-secondary" data-id="${dataset.id}">
+                                    <i class="fas fa-info-circle"></i> Detail
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    datasetGrid.appendChild(card);
+                });
+                
+                // Add event listeners to buttons
+                document.querySelectorAll('.card-btn.btn-primary').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const datasetId = this.getAttribute('data-id');
+                        alert(`Memulai unduhan dataset #${datasetId}`);
+                    });
+                });
+                
+                document.querySelectorAll('.card-btn.btn-secondary').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const datasetId = this.getAttribute('data-id');
+                        alert(`Menampilkan detail dataset #${datasetId}`);
+                    });
+                });
+            }
+
+            // Render pagination
+            function renderPagination() {
+                pagination.innerHTML = '';
+                const totalPages = Math.ceil(filteredDatasets.length / itemsPerPage);
+                
+                if (totalPages <= 1) return;
+                
+                // Previous button
+                const prevBtn = document.createElement('div');
+                prevBtn.className = 'page-item';
+                prevBtn.innerHTML = `
+                    <a href="#" class="page-link ${currentPage === 1 ? 'disabled' : ''}" data-page="prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                `;
+                pagination.appendChild(prevBtn);
+                
+                // Page numbers
+                for (let i = 1; i <= totalPages; i++) {
+                    const pageItem = document.createElement('div');
+                    pageItem.className = 'page-item';
+                    pageItem.innerHTML = `
+                        <a href="#" class="page-link ${currentPage === i ? 'active' : ''}" data-page="${i}">
+                            ${i}
+                        </a>
+                    `;
+                    pagination.appendChild(pageItem);
+                }
+                
+                // Next button
+                const nextBtn = document.createElement('div');
+                nextBtn.className = 'page-item';
+                nextBtn.innerHTML = `
+                    <a href="#" class="page-link ${currentPage === totalPages ? 'disabled' : ''}" data-page="next">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                `;
+                pagination.appendChild(nextBtn);
+
+                // Add event listeners to all page links
+                pagination.querySelectorAll('.page-link').forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        if (this.classList.contains('disabled')) {
+                            return;
+                        }
+                        const page = this.getAttribute('data-page');
+                        if (page === 'prev') {
+                            currentPage--;
+                        } else if (page === 'next') {
+                            currentPage++;
+                        } else {
+                            currentPage = parseInt(page);
+                        }
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        renderDatasets();
+                        renderPagination();
+                    });
+                });
+            }
+
+            // --- Event Listeners untuk Interaksi Pengguna ---
+
+            // Toggle Dark Mode
+            darkModeBtn.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                const isDarkMode = document.body.classList.contains('dark-mode');
+                darkModeBtn.querySelector('i').className = isDarkMode ? 'fas fa-sun' : 'fas fa-moon';
+            });
+
+            // Toggle Mobile Menu
+            mobileMenuBtn.addEventListener('click', () => {
+                mainMenu.classList.toggle('active');
+            });
+            
+            // Filter dan Pencarian
+            function performSearch() {
+                const query = searchInput.value.toLowerCase().trim();
+                filteredDatasets = datasets.filter(dataset => {
+                    return dataset.title.toLowerCase().includes(query) ||
+                           dataset.desc.toLowerCase().includes(query) ||
+                           dataset.category.toLowerCase().includes(query) ||
+                           dataset.org.toLowerCase().includes(query);
+                });
+                currentPage = 1;
+                renderDatasets();
+                renderPagination();
+            }
+
+            searchBtn.addEventListener('click', performSearch);
+            searchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+
+            // Toggle Sort Dropdown
+            sortBtn.addEventListener('click', () => {
+                sortOptions.classList.toggle('show');
+            });
+
+            // Handle Sorting
+            sortOptions.querySelectorAll('.sort-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    currentSort = this.getAttribute('data-sort');
+                    const sortText = this.textContent;
+                    sortBtnText.textContent = `Urutkan: ${sortText}`;
+                    
+                    switch (currentSort) {
+                        case 'newest':
+                            filteredDatasets.sort((a, b) => b.id - a.id);
+                            break;
+                        case 'oldest':
+                            filteredDatasets.sort((a, b) => a.id - b.id);
+                            break;
+                        case 'popular':
+                            filteredDatasets.sort((a, b) => b.downloads - a.downloads);
+                            break;
+                        case 'az':
+                            filteredDatasets.sort((a, b) => a.title.localeCompare(b.title));
+                            break;
+                        case 'za':
+                            filteredDatasets.sort((a, b) => b.title.localeCompare(a.title));
+                            break;
+                    }
+                    
+                    currentPage = 1;
+                    renderDatasets();
+                    renderPagination();
+                    sortOptions.classList.remove('show');
+                });
+            });
+
+            // Hide sort dropdown on click outside
+            document.addEventListener('click', (event) => {
+                if (!sortBtn.contains(event.target) && !sortOptions.contains(event.target)) {
+                    sortOptions.classList.remove('show');
+                }
+            });
+
+            // Initial render when the page loads
+            renderDatasets();
+            renderPagination();
+        });
+    </script>
+</body>
+</html>
