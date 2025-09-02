@@ -503,7 +503,7 @@
             cursor: not-allowed;
         }
 
-        /* Footer (tetap sama) */
+        /* Footer - Diperbaiki */
         footer {
             background-color: #f8f9fa;
             padding: 40px 0 20px;
@@ -534,9 +534,31 @@
             margin-bottom: 20px;
         }
 
+        /* PERUBAHAN PENTING: Gaya gambar di footer */
         .footer-col img {
-            height: 60px;
+            max-width: 120px;
+            height: auto;
+            margin-right: 15px;
             margin-bottom: 15px;
+            object-fit: contain;
+        }
+
+        .footer-col img[src*="logo pemkot"] {
+            max-width: 100px;
+        }
+
+        .footer-col img[src*="logo diskominfo"] {
+            max-width: 110px;
+        }
+
+        .footer-col p {
+            margin: 10px 0;
+            line-height: 1.6;
+            color: inherit;
+        }
+
+        body.dark-mode .footer-col p {
+            color: var(--dark);
         }
 
         .footer-col .social-links a {
@@ -550,6 +572,39 @@
             color: var(--primary);
         }
 
+        .footer-col h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        body.dark-mode .footer-col h3 {
+            color: var(--dark);
+        }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+            color: inherit;
+        }
+
+        body.dark-mode .footer-col ul li {
+            color: var(--dark);
+        }
+
+        .footer-col ul li i {
+            margin-right: 8px;
+            color: #3498db;
+        }
+
+        body.dark-mode .footer-col ul li i {
+            color: var(--accent);
+        }
+
         .copyright {
             text-align: center;
             margin-top: 30px;
@@ -560,6 +615,11 @@
             max-width: 1200px;
             margin: 30px auto 0;
             padding: 20px 20px 0;
+        }
+
+        body.dark-mode .copyright {
+            color: var(--dark);
+            border-top-color: rgba(255,255,255,0.1);
         }
 
         /* Responsive design */
@@ -604,6 +664,15 @@
             
             .filter-buttons {
                 flex-wrap: wrap;
+            }
+            
+            /* Responsive untuk footer */
+            .footer-col {
+                flex: 100%;
+            }
+            
+            .footer-col img {
+                max-width: 90px;
             }
         }
 
@@ -686,10 +755,12 @@
         </div>
 
         <div class="dataset-grid" id="datasetGrid">
-            </div>
+            <!-- Dataset cards will be rendered here by JavaScript -->
+        </div>
 
         <div class="pagination" id="pagination">
-            </div>
+            <!-- Pagination will be rendered here by JavaScript -->
+        </div>
     </main>
 
     <footer>
@@ -958,179 +1029,226 @@
                                 </div>
                             </div>
                             <div class="card-actions">
-                                <a href="#" class="card-btn btn-primary" data-id="${dataset.id}">
-                                    <i class="fas fa-download"></i> Unduh
-                                </a>
-                                <a href="#" class="card-btn btn-secondary" data-id="${dataset.id}">
-                                    <i class="fas fa-info-circle"></i> Detail
-                                </a>
+                                <a href="#" class="card-btn btn-primary">Unduh</a>
+                                <a href="#" class="card-btn btn-secondary">Detail</a>
                             </div>
                         </div>
                     `;
                     datasetGrid.appendChild(card);
                 });
-                
-                // Add event listeners to buttons
-                document.querySelectorAll('.card-btn.btn-primary').forEach(btn => {
-                    btn.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        const datasetId = this.getAttribute('data-id');
-                        alert(`Memulai unduhan dataset #${datasetId}`);
-                    });
-                });
-                
-                document.querySelectorAll('.card-btn.btn-secondary').forEach(btn => {
-                    btn.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        const datasetId = this.getAttribute('data-id');
-                        alert(`Menampilkan detail dataset #${datasetId}`);
-                    });
-                });
             }
 
             // Render pagination
             function renderPagination() {
-                pagination.innerHTML = '';
                 const totalPages = Math.ceil(filteredDatasets.length / itemsPerPage);
                 
-                if (totalPages <= 1) return;
+                if (totalPages <= 1) {
+                    pagination.innerHTML = '';
+                    return;
+                }
+                
+                let paginationHTML = '';
                 
                 // Previous button
-                const prevBtn = document.createElement('div');
-                prevBtn.className = 'page-item';
-                prevBtn.innerHTML = `
-                    <a href="#" class="page-link ${currentPage === 1 ? 'disabled' : ''}" data-page="prev">
-                        <i class="fas fa-chevron-left"></i>
-                    </a>
-                `;
-                pagination.appendChild(prevBtn);
+                if (currentPage > 1) {
+                    paginationHTML += `
+                        <div class="page-item">
+                            <a href="#" class="page-link" data-page="${currentPage - 1}">
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                        </div>
+                    `;
+                } else {
+                    paginationHTML += `
+                        <div class="page-item">
+                            <span class="page-link disabled">
+                                <i class="fas fa-chevron-left"></i>
+                            </span>
+                        </div>
+                    `;
+                }
                 
                 // Page numbers
                 for (let i = 1; i <= totalPages; i++) {
-                    const pageItem = document.createElement('div');
-                    pageItem.className = 'page-item';
-                    pageItem.innerHTML = `
-                        <a href="#" class="page-link ${currentPage === i ? 'active' : ''}" data-page="${i}">
-                            ${i}
-                        </a>
-                    `;
-                    pagination.appendChild(pageItem);
+                    if (i === currentPage) {
+                        paginationHTML += `
+                            <div class="page-item">
+                                <span class="page-link active">${i}</span>
+                            </div>
+                        `;
+                    } else {
+                        paginationHTML += `
+                            <div class="page-item">
+                                <a href="#" class="page-link" data-page="${i}">${i}</a>
+                            </div>
+                        `;
+                    }
                 }
                 
                 // Next button
-                const nextBtn = document.createElement('div');
-                nextBtn.className = 'page-item';
-                nextBtn.innerHTML = `
-                    <a href="#" class="page-link ${currentPage === totalPages ? 'disabled' : ''}" data-page="next">
-                        <i class="fas fa-chevron-right"></i>
-                    </a>
-                `;
-                pagination.appendChild(nextBtn);
-
-                // Add event listeners to all page links
-                pagination.querySelectorAll('.page-link').forEach(link => {
+                if (currentPage < totalPages) {
+                    paginationHTML += `
+                        <div class="page-item">
+                            <a href="#" class="page-link" data-page="${currentPage + 1}">
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </div>
+                    `;
+                } else {
+                    paginationHTML += `
+                        <div class="page-item">
+                            <span class="page-link disabled">
+                                <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </div>
+                    `;
+                }
+                
+                pagination.innerHTML = paginationHTML;
+                
+                // Add event listeners to pagination links
+                document.querySelectorAll('.page-link[data-page]').forEach(link => {
                     link.addEventListener('click', function(e) {
                         e.preventDefault();
-                        if (this.classList.contains('disabled')) {
-                            return;
-                        }
-                        const page = this.getAttribute('data-page');
-                        if (page === 'prev') {
-                            currentPage--;
-                        } else if (page === 'next') {
-                            currentPage++;
-                        } else {
-                            currentPage = parseInt(page);
-                        }
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        currentPage = parseInt(this.getAttribute('data-page'));
                         renderDatasets();
                         renderPagination();
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
                     });
                 });
             }
 
-            // --- Event Listeners untuk Interaksi Pengguna ---
-
-            // Toggle Dark Mode
-            darkModeBtn.addEventListener('click', () => {
-                document.body.classList.toggle('dark-mode');
-                const isDarkMode = document.body.classList.contains('dark-mode');
-                darkModeBtn.querySelector('i').className = isDarkMode ? 'fas fa-sun' : 'fas fa-moon';
-            });
-
-            // Toggle Mobile Menu
-            mobileMenuBtn.addEventListener('click', () => {
-                mainMenu.classList.toggle('active');
-            });
-            
-            // Filter dan Pencarian
-            function performSearch() {
-                const query = searchInput.value.toLowerCase().trim();
-                filteredDatasets = datasets.filter(dataset => {
-                    return dataset.title.toLowerCase().includes(query) ||
-                           dataset.desc.toLowerCase().includes(query) ||
-                           dataset.category.toLowerCase().includes(query) ||
-                           dataset.org.toLowerCase().includes(query);
-                });
+            // Search datasets
+            function searchDatasets() {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                
+                if (searchTerm === '') {
+                    filteredDatasets = [...datasets];
+                } else {
+                    filteredDatasets = datasets.filter(dataset => 
+                        dataset.title.toLowerCase().includes(searchTerm) ||
+                        dataset.desc.toLowerCase().includes(searchTerm) ||
+                        dataset.category.toLowerCase().includes(searchTerm) ||
+                        dataset.org.toLowerCase().includes(searchTerm)
+                    );
+                }
+                
+                // Apply current sort
+                sortDatasets(currentSort);
+                
                 currentPage = 1;
                 renderDatasets();
                 renderPagination();
             }
 
-            searchBtn.addEventListener('click', performSearch);
-            searchInput.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') {
-                    performSearch();
+            // Sort datasets
+            function sortDatasets(sortType) {
+                currentSort = sortType;
+                
+                switch(sortType) {
+                    case 'newest':
+                        filteredDatasets.sort((a, b) => b.id - a.id);
+                        sortBtnText.textContent = 'Urutkan: Terbaru';
+                        break;
+                    case 'oldest':
+                        filteredDatasets.sort((a, b) => a.id - b.id);
+                        sortBtnText.textContent = 'Urutkan: Terlama';
+                        break;
+                    case 'popular':
+                        filteredDatasets.sort((a, b) => b.downloads - a.downloads);
+                        sortBtnText.textContent = 'Urutkan: Populer';
+                        break;
+                    case 'az':
+                        filteredDatasets.sort((a, b) => a.title.localeCompare(b.title));
+                        sortBtnText.textContent = 'Urutkan: A-Z';
+                        break;
+                    case 'za':
+                        filteredDatasets.sort((a, b) => b.title.localeCompare(a.title));
+                        sortBtnText.textContent = 'Urutkan: Z-A';
+                        break;
                 }
-            });
+                
+                currentPage = 1;
+                renderDatasets();
+                renderPagination();
+            }
 
-            // Toggle Sort Dropdown
-            sortBtn.addEventListener('click', () => {
-                sortOptions.classList.toggle('show');
-            });
+            // Toggle dark mode
+            function toggleDarkMode() {
+                document.body.classList.toggle('dark-mode');
+                const isDarkMode = document.body.classList.contains('dark-mode');
+                localStorage.setItem('darkMode', isDarkMode);
+                
+                // Update icon
+                const icon = darkModeBtn.querySelector('i');
+                if (isDarkMode) {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+            }
 
-            // Handle Sorting
-            sortOptions.querySelectorAll('.sort-option').forEach(option => {
-                option.addEventListener('click', function() {
-                    currentSort = this.getAttribute('data-sort');
-                    const sortText = this.textContent;
-                    sortBtnText.textContent = `Urutkan: ${sortText}`;
-                    
-                    switch (currentSort) {
-                        case 'newest':
-                            filteredDatasets.sort((a, b) => b.id - a.id);
-                            break;
-                        case 'oldest':
-                            filteredDatasets.sort((a, b) => a.id - b.id);
-                            break;
-                        case 'popular':
-                            filteredDatasets.sort((a, b) => b.downloads - a.downloads);
-                            break;
-                        case 'az':
-                            filteredDatasets.sort((a, b) => a.title.localeCompare(b.title));
-                            break;
-                        case 'za':
-                            filteredDatasets.sort((a, b) => b.title.localeCompare(a.title));
-                            break;
+            // Initialize dark mode from localStorage
+            function initDarkMode() {
+                const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+                if (savedDarkMode) {
+                    document.body.classList.add('dark-mode');
+                    const icon = darkModeBtn.querySelector('i');
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                }
+            }
+
+            // Toggle mobile menu
+            function toggleMobileMenu() {
+                mainMenu.classList.toggle('active');
+            }
+
+            // Initialize the page
+            function init() {
+                initDarkMode();
+                renderDatasets();
+                renderPagination();
+                
+                // Event listeners
+                searchBtn.addEventListener('click', searchDatasets);
+                searchInput.addEventListener('keyup', function(e) {
+                    if (e.key === 'Enter') {
+                        searchDatasets();
                     }
-                    
-                    currentPage = 1;
-                    renderDatasets();
-                    renderPagination();
-                    sortOptions.classList.remove('show');
                 });
-            });
+                
+                sortBtn.addEventListener('click', function() {
+                    sortOptions.classList.toggle('show');
+                });
+                
+                document.querySelectorAll('.sort-option').forEach(option => {
+                    option.addEventListener('click', function() {
+                        const sortType = this.getAttribute('data-sort');
+                        sortDatasets(sortType);
+                        sortOptions.classList.remove('show');
+                    });
+                });
+                
+                // Close sort dropdown when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!sortBtn.contains(e.target) && !sortOptions.contains(e.target)) {
+                        sortOptions.classList.remove('show');
+                    }
+                });
+                
+                filterBtn.addEventListener('click', function() {
+                    alert('Fitur filter akan segera tersedia!');
+                });
+                
+                darkModeBtn.addEventListener('click', toggleDarkMode);
+                mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+            }
 
-            // Hide sort dropdown on click outside
-            document.addEventListener('click', (event) => {
-                if (!sortBtn.contains(event.target) && !sortOptions.contains(event.target)) {
-                    sortOptions.classList.remove('show');
-                }
-            });
-
-            // Initial render when the page loads
-            renderDatasets();
-            renderPagination();
+            // Start the application
+            init();
         });
     </script>
 </body>
