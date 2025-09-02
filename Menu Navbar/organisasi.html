@@ -8,14 +8,6 @@
     <link rel="stylesheet"href="../Menu Navbar/css/organisasi.css">
 </head>
 <body>
-    <div class="loader" id="loader">
-        <div class="loader-content">
-            <div class="spinner"></div>
-            <p>Memuat Data...</p>
-        </div>
-    </div>
-    <div class="toast" id="toast"></div>
-
     <header>
         <nav>
             <div class="logo">
@@ -30,31 +22,186 @@
                 <li><a href="organisasi.html" class="active">Organisasi</a></li>
                 <li><a href="grup.html">Grup</a></li>
                 <li><a href="tentang.html">Tentang</a></li>
-                <li><a href="ketentuan pengguna.html">Ketentuan</a></li>
-                <li class="mode-toggle">
-                    <button id="darkModeBtn" class="icon-toggle" aria-label="Toggle Dark Mode">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                </li>
+                <li><a href="ketentuan-pengguna.html">Ketentuan Pengguna</a></li>
+                <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
             </ul>
+            <div class="mode-toggle">
+                <button id="darkModeBtn" class="icon-toggle" aria-label="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
         </nav>
     </header>
 
     <main>
-        <section class="organizations-section">
-            <div class="container">
+        <div class="container">
+            <section class="orgs-section">
                 <div class="section-title">
                     <h2>Organisasi</h2>
                 </div>
+
                 <div class="org-search-container">
-                    <input type="text" id="orgSearchInput" placeholder="Cari organisasi...">
-                    <button id="orgSearchBtn"><i class="fas fa-search"></i></button>
+                    <input type="text" placeholder="Cari organisasi...">
+                    <button><i class="fas fa-search"></i></button>
                 </div>
-                <div class="organizations-grid" id="organizationsGrid">
-                    <!-- Data organisasi akan dimuat di sini -->
+
+                <div class="categories-filter">
+                    <button class="category-btn active">Semua</button>
+                    <button class="category-btn">Pemerintahan</button>
+                    <button class="category-btn">Pendidikan</button>
+                    <button class="category-btn">Kesehatan</button>
+                    <button class="category-btn">Infrastruktur</button>
+                    <button class="category-btn">Ekonomi</button>
+                    <button class="category-btn">Sosial</button>
                 </div>
-            </div>
-        </section>
+
+                <div class="orgs-grid">
+                    <div class="org-card government">
+                        <div class="org-header">
+                            <img src="../images/logo pemkot.jpg" alt="Pemerintah Kota Tanjungpinang" class="org-image">
+                            <h3 class="org-name">Pemerintah Kota Tanjungpinang</h3>
+                            <span class="org-category">Pemerintahan</span>
+                        </div>
+                        <div class="org-body">
+                            <p class="org-description">Organisasi pemerintah daerah yang bertanggung jawab atas penyelenggaraan pemerintahan di Kota Tanjungpinang.</p>
+                            <div class="org-stats">
+                                <div class="stat-item">
+                                    <span class="count">45</span>
+                                    <span class="label">Dataset</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="count">12</span>
+                                    <span class="label">Grup</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="org-footer">
+                            <button class="view-btn">Lihat Detail</button>
+                        </div>
+                    </div>
+
+                    <div class="org-card education">
+                        <div class="org-header">
+                            <img src="../images/logo-dinas-pendidikan.png" alt="Dinas Pendidikan" class="org-image">
+                            <h3 class="org-name">Dinas Pendidikan</h3>
+                            <span class="org-category">Pendidikan</span>
+                        </div>
+                        <div class="org-body">
+                            <p class="org-description">Dinas yang bertanggung jawab atas pengelolaan dan pengembangan pendidikan di Kota Tanjungpinang.</p>
+                            <div class="org-stats">
+                                <div class="stat-item">
+                                    <span class="count">38</span>
+                                    <span class="label">Dataset</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="count">8</span>
+                                    <span class="label">Grup</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="org-footer">
+                            <button class="view-btn">Lihat Detail</button>
+                        </div>
+                    </div>
+                    
+                    <div class="org-card health">
+                        <div class="org-header">
+                            <img src="../images/logo-dinas-kesehatan.png" alt="Dinas Kesehatan" class="org-image">
+                            <h3 class="org-name">Dinas Kesehatan</h3>
+                            <span class="org-category">Kesehatan</span>
+                        </div>
+                        <div class="org-body">
+                            <p class="org-description">Dinas yang mengurusi pelayanan kesehatan dan program kesehatan masyarakat di Kota Tanjungpinang.</p>
+                            <div class="org-stats">
+                                <div class="stat-item">
+                                    <span class="count">32</span>
+                                    <span class="label">Dataset</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="count">6</span>
+                                    <span class="label">Grup</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="org-footer">
+                            <button class="view-btn">Lihat Detail</button>
+                        </div>
+                    </div>
+
+                    <div class="org-card infrastructure">
+                        <div class="org-header">
+                            <img src="../images/logo-dinas-pupr.png" alt="Dinas PUPR" class="org-image">
+                            <h3 class="org-name">Dinas PUPR</h3>
+                            <span class="org-category">Infrastruktur</span>
+                        </div>
+                        <div class="org-body">
+                            <p class="org-description">Dinas Pekerjaan Umum dan Penataan Ruang yang mengurusi infrastruktur dan tata ruang kota.</p>
+                            <div class="org-stats">
+                                <div class="stat-item">
+                                    <span class="count">28</span>
+                                    <span class="label">Dataset</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="count">5</span>
+                                    <span class="label">Grup</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="org-footer">
+                            <button class="view-btn">Lihat Detail</button>
+                        </div>
+                    </div>
+
+                    <div class="org-card economic">
+                        <div class="org-header">
+                            <img src="../images/logo-dinas-perdagangan.png" alt="Dinas Perdagangan" class="org-image">
+                            <h3 class="org-name">Dinas Perdagangan</h3>
+                            <span class="org-category">Ekonomi</span>
+                        </div>
+                        <div class="org-body">
+                            <p class="org-description">Dinas yang mengurusi perdagangan, industri, dan koperasi di wilayah Kota Tanjungpinang.</p>
+                            <div class="org-stats">
+                                <div class="stat-item">
+                                    <span class="count">25</span>
+                                    <span class="label">Dataset</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="count">4</span>
+                                    <span class="label">Grup</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="org-footer">
+                            <button class="view-btn">Lihat Detail</button>
+                        </div>
+                    </div>
+
+                    <div class="org-card social">
+                        <div class="org-header">
+                            <img src="../images/logo-dinas-sosial.png" alt="Dinas Sosial" class="org-image">
+                            <h3 class="org-name">Dinas Sosial</h3>
+                            <span class="org-category">Sosial</span>
+                        </div>
+                        <div class="org-body">
+                            <p class="org-description">Dinas yang menangani masalah kesejahteraan sosial dan pemberdayaan masyarakat.</p>
+                            <div class="org-stats">
+                                <div class="stat-item">
+                                    <span class="count">22</span>
+                                    <span class="label">Dataset</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="count">3</span>
+                                    <span class="label">Grup</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="org-footer">
+                            <button class="view-btn">Lihat Detail</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
     </main>
 
     <footer>
@@ -76,11 +223,10 @@
                     <ul>
                         <li><a href="../index.html">Beranda</a></li>
                         <li><a href="dataset.html">Dataset</a></li>
-                        <li><a href="organisasi.html">Organisasi</a></li>
+                        <li><a href="organisasi.html" class="active">Organisasi</a></li>
                         <li><a href="grup.html">Group</a></li>
                         <li><a href="tentang.html">Tentang</a></li>
-                        <li><a href="ketentuan pengguna.html">Ketentuan Pengguna</a></li>
-                        <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+                        <li><a href="ketentuan-pengguna.html">Ketentuan Pengguna</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -108,31 +254,11 @@
     </footer>
     
     <script>
-        // JavaScript untuk interaktivitas
         document.addEventListener('DOMContentLoaded', function() {
-            // Loader
-            const loader = document.getElementById('loader');
-            setTimeout(() => {
-                loader.style.opacity = '0';
-                setTimeout(() => {
-                    loader.style.display = 'none';
-                }, 500);
-            }, 1500);
-            
-            // Toggle menu mobile
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const mainMenu = document.getElementById('mainMenu');
-            
-            mobileMenuBtn.addEventListener('click', () => {
-                mainMenu.classList.toggle('active');
-                mobileMenuBtn.innerHTML = mainMenu.classList.contains('active') ? 
-                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-            });
-            
-            // Dark mode toggle
-            const darkModeBtn = document.getElementById('darkModeBtn');
+            // --- Logika Mode Malam ---
             const body = document.body;
-            
+            const darkModeBtn = document.getElementById('darkModeBtn');
+
             function toggleDarkMode() {
                 body.classList.toggle('dark-mode');
                 const isDarkMode = body.classList.contains('dark-mode');
@@ -158,127 +284,51 @@
                     darkModeBtn.innerHTML = '<i class="fas fa-sun"></i>';
                 }
             }
-            
-            // Pencarian organisasi
-            const orgSearchInput = document.getElementById('orgSearchInput');
-            const orgSearchBtn = document.getElementById('orgSearchBtn');
-            
-            orgSearchBtn.addEventListener('click', searchOrganizations);
-            orgSearchInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    searchOrganizations();
-                }
+
+            // --- Akhir Logika Mode Malam ---
+
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainMenu = document.getElementById('mainMenu');
+
+            mobileMenuBtn.addEventListener('click', function() {
+                mainMenu.classList.toggle('active');
+                this.innerHTML = mainMenu.classList.contains('active') ?
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
             });
+
+            // Filter kategori
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const orgCards = document.querySelectorAll('.org-card');
             
-            function searchOrganizations() {
-                const searchTerm = orgSearchInput.value.toLowerCase();
-                showToast(`Mencari: ${searchTerm}`);
-                // Di sini akan ditambahkan logika pencarian yang sesungguhnya
-                filterOrganizations(searchTerm);
-            }
-            
-            // Filter organisasi berdasarkan pencarian
-            function filterOrganizations(searchTerm) {
-                const filteredOrgs = sampleOrganizations.filter(org => 
-                    org.name.toLowerCase().includes(searchTerm) || 
-                    org.description.toLowerCase().includes(searchTerm)
-                );
-                renderOrganizations(filteredOrgs);
-            }
-            
-            // Fungsi toast notification
-            function showToast(message) {
-                const toast = document.getElementById('toast');
-                toast.textContent = message;
-                toast.classList.add('show');
-                
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 3000);
-            }
-            
-            // Memuat data organisasi (contoh data)
-            const organizationsGrid = document.getElementById('organizationsGrid');
-            const sampleOrganizations = [
-                {
-                    name: "Dinas Komunikasi dan Informatika",
-                    description: "Mengelola data dan informasi pemerintahan Kota Tanjungpinang",
-                    datasets: 42,
-                    image: "../images/logo diskominfo.jpg"
-                },
-                {
-                    name: "Dinas Kesehatan",
-                    description: "Mengelola data kesehatan dan fasilitas kesehatan di Tanjungpinang",
-                    datasets: 28,
-                    image: "https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                },
-                {
-                    name: "Dinas Pendidikan",
-                    description: "Mengelola data pendidikan dan sekolah di Tanjungpinang",
-                    datasets: 35,
-                    image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                },
-                {
-                    name: "Dinas Pekerjaan Umum",
-                    description: "Mengelola data infrastruktur dan tata kota Tanjungpinang",
-                    datasets: 31,
-                    image: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                },
-                {
-                    name: "Badan Pusat Statistik",
-                    description: "Menyediakan data statistik Kota Tanjungpinang",
-                    datasets: 56,
-                    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                },
-                {
-                    name: "Dinas Perhubungan",
-                    description: "Mengelola data transportasi dan lalu lintas Tanjungpinang",
-                    datasets: 22,
-                    image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                }
-            ];
-            
-            // Render organisasi
-            function renderOrganizations(organizations) {
-                organizationsGrid.innerHTML = '';
-                
-                if (organizations.length === 0) {
-                    organizationsGrid.innerHTML = `
-                        <div class="no-results" style="grid-column: 1 / -1; text-align: center; padding: 40px;">
-                            <i class="fas fa-search" style="font-size: 3rem; color: var(--text-muted); margin-bottom: 20px;"></i>
-                            <h3 style="color: var(--text-muted);">Tidak ada organisasi yang ditemukan</h3>
-                            <p style="color: var(--text-muted);">Coba gunakan kata kunci pencarian yang berbeda</p>
-                        </div>
-                    `;
-                    return;
-                }
-                
-                organizations.forEach(org => {
-                    const orgCard = document.createElement('div');
-                    orgCard.className = 'organization-card';
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Hapus kelas aktif dari semua tombol
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    // Tambahkan kelas aktif ke tombol yang diklik
+                    button.classList.add('active');
                     
-                    orgCard.innerHTML = `
-                        <div class="org-logo">
-                            <img src="${org.image}" alt="${org.name}">
-                        </div>
-                        <h3 class="org-name">${org.name}</h3>
-                        <p class="org-description">${org.description}</p>
-                        <div class="org-stats">
-                            <div class="stat-item">
-                                <div class="count">${org.datasets}</div>
-                                <div class="label">Dataset</div>
-                            </div>
-                        </div>
-                    `;
+                    const filter = button.textContent.trim();
                     
-                    organizationsGrid.appendChild(orgCard);
+                    if (filter === 'Semua') {
+                        orgCards.forEach(card => {
+                            card.style.display = 'flex';
+                        });
+                    } else {
+                        orgCards.forEach(card => {
+                            if (card.classList.contains(filter.toLowerCase())) {
+                                card.style.display = 'flex';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        });
+                    }
                 });
-            }
-            
+            });
+
             // Initialize the app
             function initApp() {
                 loadUserPreferences();
-                renderOrganizations(sampleOrganizations);
             }
             
             initApp();

@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Organisasi - Open Data Tanjungpinang</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
-        /* CSS yang Anda berikan telah digabungkan di sini */
         :root {
             --primary: #d13e3e;
             --secondary: #CD1818;
@@ -49,21 +47,18 @@
             color: var(--text-color);
             line-height: 1.6;
             transition: background-color 0.5s, color 0.5s;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
 
         /* Header Styles */
         header {
             background-color: var(--header-bg);
             color: var(--header-text);
+            padding: 15px 0;
             position: sticky;
             top: 0;
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             transition: background-color 0.5s, color 0.5s;
-            width: 100%;
         }
 
         nav {
@@ -72,9 +67,7 @@
             align-items: center;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 15px 20px;
-            height: 70px;
-            box-sizing: border-box;
+            padding: 0 20px;
         }
 
         .logo {
@@ -92,30 +85,39 @@
             transform: scale(1.05);
         }
 
-        #mainMenu {
+        .logo-text {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        nav ul {
             list-style: none;
             margin: 0;
             padding: 0;
             display: flex;
             gap: 15px;
-            align-items: center;
         }
 
-        #mainMenu li a {
+        nav ul li a {
             color: var(--header-text);
             text-decoration: none;
             font-weight: 500;
             padding: 8px 12px;
             border-radius: 4px;
             transition: background-color 0.3s;
-            display: block;
         }
 
-        #mainMenu li a:hover, #mainMenu li a.active {
+        nav ul li a:hover, nav ul li a.active {
             background-color: rgba(255,255,255,0.2);
         }
 
-        .icon-toggle {
+        .mode-toggle {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .mode-toggle .icon-toggle {
             background: none;
             border: 1px solid var(--header-text);
             color: var(--header-text);
@@ -131,9 +133,15 @@
             box-sizing: border-box;
         }
 
-        .icon-toggle:hover {
+        .mode-toggle .icon-toggle:hover {
             background-color: var(--header-text);
             color: var(--header-bg);
+        }
+
+        .mode-toggle .icon-toggle.active {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: white;
         }
 
         .mobile-menu-btn {
@@ -181,7 +189,7 @@
             background-color: var(--accent);
         }
 
-        /* Pencarian Organisasi */
+        /* Pencarian dan Filter Organisasi */
         .org-search-container {
             max-width: 600px;
             margin: 0 auto 40px;
@@ -208,7 +216,7 @@
         }
 
         .org-search-container button {
-            padding: 0 20px;
+            padding: 0 25px;
             border: none;
             background-color: var(--primary);
             color: white;
@@ -220,14 +228,41 @@
             background-color: var(--secondary);
         }
 
-        /* Grid Organisasi */
-        .organizations-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
+        .categories-filter {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
         }
 
-        .organization-card {
+        .category-btn {
+            padding: 8px 20px;
+            border: 1px solid var(--input-border);
+            border-radius: 30px;
+            background-color: var(--bg-card);
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-weight: 500;
+        }
+
+        .category-btn:hover, .category-btn.active {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            border-color: var(--primary);
+        }
+
+        /* Grid Organisasi */
+        .orgs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .org-card {
             background-color: var(--bg-card);
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -235,53 +270,83 @@
             transition: transform 0.3s, box-shadow 0.3s, background-color 0.5s;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 25px;
         }
 
-        .organization-card:hover {
+        .org-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 8px 25px rgba(0,0,0,0.15);
         }
 
-        .org-logo {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin-bottom: 20px;
-            border: 3px solid var(--primary);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            background-color: white;
+        .org-header {
+            padding: 25px 25px 15px;
+            text-align: center;
+            border-bottom: 1px solid var(--input-border);
         }
 
-        .org-logo img {
-            width: 100%;
-            height: 100%;
+        .org-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
             object-fit: cover;
+            margin: 0 auto 15px;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
+
+        /* Warna untuk kategori */
+        .government .org-image { border-color: #FF9800; }
+        .education .org-image { border-color: #4CAF50; }
+        .health .org-image { border-color: #E91E63; }
+        .infrastructure .org-image { border-color: #607D8B; }
+        .economic .org-image { border-color: #F44336; }
+        .social .org-image { border-color: #2196F3; }
 
         .org-name {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 600;
             color: var(--text-color);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+        }
+
+        .org-category {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .government .org-category { background-color: #FF9800; }
+        .education .org-category { background-color: #4CAF50; }
+        .health .org-category { background-color: #E91E63; }
+        .infrastructure .org-category { background-color: #607D8B; }
+        .economic .org-category { background-color: #F44336; }
+        .social .org-category { background-color: #2196F3; }
+
+        .org-body {
+            padding: 20px 25px;
+            flex-grow: 1;
         }
 
         .org-description {
             font-size: 0.95rem;
             color: var(--text-muted);
+            line-height: 1.6;
             margin-bottom: 20px;
-            flex-grow: 1;
         }
-
+        
         .org-stats {
             display: flex;
-            justify-content: center;
-            width: 100%;
+            justify-content: space-between;
+            margin-bottom: 20px;
             border-top: 1px solid var(--input-border);
-            padding-top: 15px;
+            padding-top: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
         }
 
         .stat-item .count {
@@ -291,8 +356,32 @@
         }
 
         .stat-item .label {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
+        }
+        
+        .org-footer {
+            padding: 15px 25px;
+            border-top: 1px solid var(--input-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .view-btn {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--primary);
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            font-weight: 500;
+        }
+
+        .view-btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
         }
 
         /* Footer Styles */
@@ -363,7 +452,6 @@
             background-color: rgba(0,0,0,0.1);
             border-radius: 50%;
             color: #333;
-            text-decoration: none;
             transition: all 0.3s;
         }
 
@@ -394,19 +482,20 @@
 
         .footer-col ul li {
             margin-bottom: 10px;
-        }
-        .footer-col ul a {
             color: inherit;
-            text-decoration: none;
-            transition: color 0.3s;
         }
-        .footer-col ul a:hover {
-            color: var(--primary);
+
+        body.dark-mode .footer-col ul li {
+            color: var(--dark);
         }
 
         .footer-col ul li i {
             margin-right: 8px;
-            color: var(--primary);
+            color: #3498db;
+        }
+
+        body.dark-mode .footer-col ul li i {
+            color: var(--accent);
         }
 
         .copyright {
@@ -423,62 +512,6 @@
             border-top-color: rgba(255,255,255,0.1);
         }
 
-        /* Loader */
-        .loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--bg-body); /* Menggunakan variabel agar konsisten */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s;
-        }
-
-        .loader-content {
-            text-align: center;
-        }
-
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid rgba(0, 0, 0, 0.1);
-            border-radius: 50%;
-            border-top-color: var(--primary);
-            animation: spin 1s ease-in-out infinite;
-            margin: 0 auto 15px;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .loader p {
-            color: var(--text-color);
-            font-size: 1.1rem;
-        }
-
-        /* Toast notification */
-        .toast {
-            position: fixed;
-            top: 20px;
-            right: -100%; /* Mulai dari luar layar */
-            padding: 15px 25px;
-            background-color: #333;
-            color: white;
-            border-radius: 5px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            z-index: 1000;
-            transition: right 0.5s ease-in-out;
-        }
-
-        .toast.show {
-            right: 20px; /* Muncul ke dalam layar */
-        }
-
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .footer-col {
@@ -489,54 +522,43 @@
                 max-width: 90px;
             }
             
-            #mainMenu {
+            nav ul {
                 position: fixed;
                 top: 70px;
-                left: -100%;
+                left: 0;
                 width: 100%;
-                height: calc(100vh - 70px);
                 background-color: var(--header-bg);
                 flex-direction: column;
                 align-items: center;
-                justify-content: center;
-                padding: 20px;
-                transition: left 0.3s ease-in-out;
+                padding: 20px 0;
+                gap: 15px;
+                transform: translateY(-150%);
+                transition: transform 0.3s ease, background-color 0.5s;
                 z-index: 999;
             }
 
-            #mainMenu.active {
-                left: 0;
-            }
-
-            #mainMenu li {
-                width: 100%;
-                text-align: center;
-            }
-
-            #mainMenu a {
-                padding: 15px;
-                font-size: 1.2rem;
+            nav ul.active {
+                transform: translateY(0);
             }
 
             .mobile-menu-btn {
                 display: block;
             }
 
-            .organizations-grid {
-                grid-template-columns: 1fr;
+            .categories-filter {
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding-bottom: 10px;
+            }
+            
+            .org-image {
+                width: 80px;
+                height: 80px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="loader" id="loader">
-        <div class="loader-content">
-            <div class="spinner"></div>
-            <p>Memuat Data...</p>
-        </div>
-    </div>
-    <div class="toast" id="toast"></div>
-
     <header>
         <nav>
             <div class="logo">
@@ -551,30 +573,186 @@
                 <li><a href="organisasi.html" class="active">Organisasi</a></li>
                 <li><a href="grup.html">Grup</a></li>
                 <li><a href="tentang.html">Tentang</a></li>
-                <li><a href="ketentuan pengguna.html">Ketentuan</a></li>
-                <li>
-                    <button id="darkModeBtn" class="icon-toggle" aria-label="Toggle Dark Mode">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                </li>
+                <li><a href="ketentuan-pengguna.html">Ketentuan Pengguna</a></li>
+                <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
             </ul>
+            <div class="mode-toggle">
+                <button id="darkModeBtn" class="icon-toggle" aria-label="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
         </nav>
     </header>
 
     <main>
-        <section class="organizations-section">
-            <div class="container">
+        <div class="container">
+            <section class="orgs-section">
                 <div class="section-title">
                     <h2>Organisasi</h2>
                 </div>
+
                 <div class="org-search-container">
-                    <input type="text" id="orgSearchInput" placeholder="Cari organisasi...">
-                    <button id="orgSearchBtn" aria-label="Cari"><i class="fas fa-search"></i></button>
+                    <input type="text" placeholder="Cari organisasi...">
+                    <button><i class="fas fa-search"></i></button>
                 </div>
-                <div class="organizations-grid" id="organizationsGrid">
+
+                <div class="categories-filter">
+                    <button class="category-btn active">Semua</button>
+                    <button class="category-btn">Pemerintahan</button>
+                    <button class="category-btn">Pendidikan</button>
+                    <button class="category-btn">Kesehatan</button>
+                    <button class="category-btn">Infrastruktur</button>
+                    <button class="category-btn">Ekonomi</button>
+                    <button class="category-btn">Sosial</button>
+                </div>
+
+                <div class="orgs-grid">
+                    <div class="org-card government">
+                        <div class="org-header">
+                            <img src="../images/logo pemkot.jpg" alt="Pemerintah Kota Tanjungpinang" class="org-image">
+                            <h3 class="org-name">Pemerintah Kota Tanjungpinang</h3>
+                            <span class="org-category">Pemerintahan</span>
+                        </div>
+                        <div class="org-body">
+                            <p class="org-description">Organisasi pemerintah daerah yang bertanggung jawab atas penyelenggaraan pemerintahan di Kota Tanjungpinang.</p>
+                            <div class="org-stats">
+                                <div class="stat-item">
+                                    <span class="count">45</span>
+                                    <span class="label">Dataset</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="count">12</span>
+                                    <span class="label">Grup</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="org-footer">
+                            <button class="view-btn">Lihat Detail</button>
+                        </div>
                     </div>
-            </div>
-        </section>
+
+                    <div class="org-card education">
+                        <div class="org-header">
+                            <img src="../images/logo-dinas-pendidikan.png" alt="Dinas Pendidikan" class="org-image">
+                            <h3 class="org-name">Dinas Pendidikan</h3>
+                            <span class="org-category">Pendidikan</span>
+                        </div>
+                        <div class="org-body">
+                            <p class="org-description">Dinas yang bertanggung jawab atas pengelolaan dan pengembangan pendidikan di Kota Tanjungpinang.</p>
+                            <div class="org-stats">
+                                <div class="stat-item">
+                                    <span class="count">38</span>
+                                    <span class="label">Dataset</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="count">8</span>
+                                    <span class="label">Grup</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="org-footer">
+                            <button class="view-btn">Lihat Detail</button>
+                        </div>
+                    </div>
+                    
+                    <div class="org-card health">
+                        <div class="org-header">
+                            <img src="../images/logo-dinas-kesehatan.png" alt="Dinas Kesehatan" class="org-image">
+                            <h3 class="org-name">Dinas Kesehatan</h3>
+                            <span class="org-category">Kesehatan</span>
+                        </div>
+                        <div class="org-body">
+                            <p class="org-description">Dinas yang mengurusi pelayanan kesehatan dan program kesehatan masyarakat di Kota Tanjungpinang.</p>
+                            <div class="org-stats">
+                                <div class="stat-item">
+                                    <span class="count">32</span>
+                                    <span class="label">Dataset</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="count">6</span>
+                                    <span class="label">Grup</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="org-footer">
+                            <button class="view-btn">Lihat Detail</button>
+                        </div>
+                    </div>
+
+                    <div class="org-card infrastructure">
+                        <div class="org-header">
+                            <img src="../images/logo-dinas-pupr.png" alt="Dinas PUPR" class="org-image">
+                            <h3 class="org-name">Dinas PUPR</h3>
+                            <span class="org-category">Infrastruktur</span>
+                        </div>
+                        <div class="org-body">
+                            <p class="org-description">Dinas Pekerjaan Umum dan Penataan Ruang yang mengurusi infrastruktur dan tata ruang kota.</p>
+                            <div class="org-stats">
+                                <div class="stat-item">
+                                    <span class="count">28</span>
+                                    <span class="label">Dataset</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="count">5</span>
+                                    <span class="label">Grup</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="org-footer">
+                            <button class="view-btn">Lihat Detail</button>
+                        </div>
+                    </div>
+
+                    <div class="org-card economic">
+                        <div class="org-header">
+                            <img src="../images/logo-dinas-perdagangan.png" alt="Dinas Perdagangan" class="org-image">
+                            <h3 class="org-name">Dinas Perdagangan</h3>
+                            <span class="org-category">Ekonomi</span>
+                        </div>
+                        <div class="org-body">
+                            <p class="org-description">Dinas yang mengurusi perdagangan, industri, dan koperasi di wilayah Kota Tanjungpinang.</p>
+                            <div class="org-stats">
+                                <div class="stat-item">
+                                    <span class="count">25</span>
+                                    <span class="label">Dataset</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="count">4</span>
+                                    <span class="label">Grup</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="org-footer">
+                            <button class="view-btn">Lihat Detail</button>
+                        </div>
+                    </div>
+
+                    <div class="org-card social">
+                        <div class="org-header">
+                            <img src="../images/logo-dinas-sosial.png" alt="Dinas Sosial" class="org-image">
+                            <h3 class="org-name">Dinas Sosial</h3>
+                            <span class="org-category">Sosial</span>
+                        </div>
+                        <div class="org-body">
+                            <p class="org-description">Dinas yang menangani masalah kesejahteraan sosial dan pemberdayaan masyarakat.</p>
+                            <div class="org-stats">
+                                <div class="stat-item">
+                                    <span class="count">22</span>
+                                    <span class="label">Dataset</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="count">3</span>
+                                    <span class="label">Grup</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="org-footer">
+                            <button class="view-btn">Lihat Detail</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
     </main>
 
     <footer>
@@ -585,10 +763,10 @@
                     <img src="../images/logo diskominfo.jpg" alt="Logo Diskominfo Tanjungpinang">
                     <p>Open Data Kota Tanjungpinang</p>
                     <div class="social-links">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="Youtube"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
@@ -596,14 +774,14 @@
                     <ul>
                         <li><a href="../index.html">Beranda</a></li>
                         <li><a href="dataset.html">Dataset</a></li>
-                        <li><a href="organisasi.html">Organisasi</a></li>
+                        <li><a href="organisasi.html" class="active">Organisasi</a></li>
                         <li><a href="grup.html">Group</a></li>
                         <li><a href="tentang.html">Tentang</a></li>
-                        <li><a href="ketentuan pengguna.html">Ketentuan Pengguna</a></li>
+                        <li><a href="ketentuan-pengguna.html">Ketentuan Pengguna</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h3>Kategori Populer</h3>
+                    <h3>Kategori</h3>
                     <ul>
                         <li><a href="#">Kependudukan</a></li>
                         <li><a href="#">Kesehatan</a></li>
@@ -628,164 +806,83 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // === ELEMEN DOM ===
-            const loader = document.getElementById('loader');
+            // --- Logika Mode Malam ---
+            const body = document.body;
+            const darkModeBtn = document.getElementById('darkModeBtn');
+
+            function toggleDarkMode() {
+                body.classList.toggle('dark-mode');
+                const isDarkMode = body.classList.contains('dark-mode');
+                localStorage.setItem('darkMode', isDarkMode);
+                darkModeBtn.classList.toggle('active', isDarkMode);
+                
+                // Ganti ikon mode gelap/terang
+                if (isDarkMode) {
+                    darkModeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+                } else {
+                    darkModeBtn.innerHTML = '<i class="fas fa-moon"></i>';
+                }
+            }
+
+            darkModeBtn.addEventListener('click', toggleDarkMode);
+
+            function loadUserPreferences() {
+                const isDarkMode = localStorage.getItem('darkMode') === 'true';
+                
+                if (isDarkMode) {
+                    body.classList.add('dark-mode');
+                    darkModeBtn.classList.add('active');
+                    darkModeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+                }
+            }
+
+            // --- Akhir Logika Mode Malam ---
+
+            // Mobile menu toggle
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const mainMenu = document.getElementById('mainMenu');
-            const darkModeBtn = document.getElementById('darkModeBtn');
-            const body = document.body;
-            const orgSearchInput = document.getElementById('orgSearchInput');
-            const orgSearchBtn = document.getElementById('orgSearchBtn');
-            const organizationsGrid = document.getElementById('organizationsGrid');
-            const toast = document.getElementById('toast');
 
-            // === DATA CONTOH ===
-            const sampleOrganizations = [
-                {
-                    name: "Dinas Komunikasi dan Informatika",
-                    description: "Mengelola data dan informasi pemerintahan Kota Tanjungpinang.",
-                    datasets: 42,
-                    image: "../images/logo diskominfo.jpg"
-                },
-                {
-                    name: "Dinas Kesehatan",
-                    description: "Mengelola data kesehatan dan fasilitas kesehatan di kota.",
-                    datasets: 28,
-                    image: "https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                },
-                {
-                    name: "Dinas Pendidikan",
-                    description: "Mengelola data pendidikan, sekolah, dan para siswa.",
-                    datasets: 35,
-                    image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                },
-                {
-                    name: "Dinas Pekerjaan Umum",
-                    description: "Mengelola data infrastruktur dan tata ruang kota.",
-                    datasets: 31,
-                    image: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                },
-                {
-                    name: "Badan Pusat Statistik",
-                    description: "Menyediakan data statistik resmi untuk Kota Tanjungpinang.",
-                    datasets: 56,
-                    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                },
-                {
-                    name: "Dinas Perhubungan",
-                    description: "Mengelola data transportasi dan lalu lintas di kota.",
-                    datasets: 22,
-                    image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                }
-            ];
-
-            // === FUNGSI-FUNGSI ===
-
-            // Fungsi untuk menampilkan notifikasi toast
-            function showToast(message) {
-                toast.textContent = message;
-                toast.classList.add('show');
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 3000);
-            }
-
-            // Fungsi untuk merender kartu organisasi
-            function renderOrganizations(organizations) {
-                organizationsGrid.innerHTML = '';
-                if (organizations.length === 0) {
-                    organizationsGrid.innerHTML = `
-                        <div class="no-results" style="grid-column: 1 / -1; text-align: center; padding: 40px;">
-                            <i class="fas fa-search" style="font-size: 3rem; color: var(--text-muted); margin-bottom: 20px;"></i>
-                            <h3 style="color: var(--text-color);">Tidak ada organisasi ditemukan</h3>
-                            <p style="color: var(--text-muted);">Coba gunakan kata kunci pencarian yang berbeda.</p>
-                        </div>`;
-                    return;
-                }
-                organizations.forEach(org => {
-                    const orgCard = document.createElement('div');
-                    orgCard.className = 'organization-card';
-                    orgCard.innerHTML = `
-                        <div class="org-logo">
-                            <img src="${org.image}" alt="Logo ${org.name}">
-                        </div>
-                        <h3 class="org-name">${org.name}</h3>
-                        <p class="org-description">${org.description}</p>
-                        <div class="org-stats">
-                            <div class="stat-item">
-                                <div class="count">${org.datasets}</div>
-                                <div class="label">Dataset</div>
-                            </div>
-                        </div>`;
-                    organizationsGrid.appendChild(orgCard);
-                });
-            }
-            
-            // Fungsi untuk memfilter organisasi
-            function filterOrganizations() {
-                const searchTerm = orgSearchInput.value.toLowerCase();
-                const filteredOrgs = sampleOrganizations.filter(org => 
-                    org.name.toLowerCase().includes(searchTerm) || 
-                    org.description.toLowerCase().includes(searchTerm)
-                );
-                renderOrganizations(filteredOrgs);
-            }
-
-            // Fungsi untuk Dark Mode
-            function setDarkMode(isDark) {
-                if (isDark) {
-                    body.classList.add('dark-mode');
-                    darkModeBtn.innerHTML = '<i class="fas fa-sun"></i>';
-                    localStorage.setItem('darkMode', 'enabled');
-                } else {
-                    body.classList.remove('dark-mode');
-                    darkModeBtn.innerHTML = '<i class="fas fa-moon"></i>';
-                    localStorage.setItem('darkMode', 'disabled');
-                }
-            }
-
-            // === EVENT LISTENERS ===
-            
-            // Loader
-            setTimeout(() => {
-                loader.style.opacity = '0';
-                setTimeout(() => loader.style.display = 'none', 500);
-            }, 1000);
-            
-            // Menu Mobile
-            mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.addEventListener('click', function() {
                 mainMenu.classList.toggle('active');
-                const icon = mobileMenuBtn.querySelector('i');
-                icon.className = mainMenu.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
+                this.innerHTML = mainMenu.classList.contains('active') ?
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
             });
-            
-            // Dark Mode
-            darkModeBtn.addEventListener('click', () => setDarkMode(!body.classList.contains('dark-mode')));
 
-            // Pencarian
-            orgSearchBtn.addEventListener('click', () => {
-                filterOrganizations();
-                showToast(`Menampilkan hasil untuk: "${orgSearchInput.value}"`);
-            });
-            orgSearchInput.addEventListener('input', filterOrganizations); // Live search
-            orgSearchInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    filterOrganizations();
-                    showToast(`Menampilkan hasil untuk: "${orgSearchInput.value}"`);
-                }
-            });
+            // Filter kategori
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const orgCards = document.querySelectorAll('.org-card');
             
-            // === INISIALISASI ===
-            function init() {
-                // Muat preferensi dark mode
-                if (localStorage.getItem('darkMode') === 'enabled') {
-                    setDarkMode(true);
-                }
-                // Render semua organisasi saat pertama kali halaman dimuat
-                renderOrganizations(sampleOrganizations);
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Hapus kelas aktif dari semua tombol
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    // Tambahkan kelas aktif ke tombol yang diklik
+                    button.classList.add('active');
+                    
+                    const filter = button.textContent.trim();
+                    
+                    if (filter === 'Semua') {
+                        orgCards.forEach(card => {
+                            card.style.display = 'flex';
+                        });
+                    } else {
+                        orgCards.forEach(card => {
+                            if (card.classList.contains(filter.toLowerCase())) {
+                                card.style.display = 'flex';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+            });
+
+            // Initialize the app
+            function initApp() {
+                loadUserPreferences();
             }
             
-            init();
+            initApp();
         });
     </script>
 </body>
