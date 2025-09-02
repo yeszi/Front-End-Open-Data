@@ -755,12 +755,10 @@
         </div>
 
         <div class="dataset-grid" id="datasetGrid">
-            <!-- Dataset cards will be rendered here by JavaScript -->
-        </div>
+            </div>
 
         <div class="pagination" id="pagination">
-            <!-- Pagination will be rendered here by JavaScript -->
-        </div>
+            </div>
     </main>
 
     <footer>
@@ -1040,74 +1038,43 @@
 
             // Render pagination
             function renderPagination() {
+                pagination.innerHTML = '';
                 const totalPages = Math.ceil(filteredDatasets.length / itemsPerPage);
                 
-                if (totalPages <= 1) {
-                    pagination.innerHTML = '';
-                    return;
-                }
-                
-                let paginationHTML = '';
+                if (totalPages <= 1) return;
                 
                 // Previous button
-                if (currentPage > 1) {
-                    paginationHTML += `
-                        <div class="page-item">
-                            <a href="#" class="page-link" data-page="${currentPage - 1}">
-                                <i class="fas fa-chevron-left"></i>
-                            </a>
-                        </div>
-                    `;
-                } else {
-                    paginationHTML += `
-                        <div class="page-item">
-                            <span class="page-link disabled">
-                                <i class="fas fa-chevron-left"></i>
-                            </span>
-                        </div>
-                    `;
-                }
+                const prevBtn = document.createElement('div');
+                prevBtn.className = 'page-item';
+                prevBtn.innerHTML = `
+                    <a href="#" class="page-link ${currentPage === 1 ? 'disabled' : ''}" data-page="${currentPage - 1}">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                `;
+                pagination.appendChild(prevBtn);
                 
                 // Page numbers
                 for (let i = 1; i <= totalPages; i++) {
-                    if (i === currentPage) {
-                        paginationHTML += `
-                            <div class="page-item">
-                                <span class="page-link active">${i}</span>
-                            </div>
-                        `;
-                    } else {
-                        paginationHTML += `
-                            <div class="page-item">
-                                <a href="#" class="page-link" data-page="${i}">${i}</a>
-                            </div>
-                        `;
-                    }
+                    const pageBtn = document.createElement('div');
+                    pageBtn.className = 'page-item';
+                    pageBtn.innerHTML = `
+                        <a href="#" class="page-link ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</a>
+                    `;
+                    pagination.appendChild(pageBtn);
                 }
                 
                 // Next button
-                if (currentPage < totalPages) {
-                    paginationHTML += `
-                        <div class="page-item">
-                            <a href="#" class="page-link" data-page="${currentPage + 1}">
-                                <i class="fas fa-chevron-right"></i>
-                            </a>
-                        </div>
-                    `;
-                } else {
-                    paginationHTML += `
-                        <div class="page-item">
-                            <span class="page-link disabled">
-                                <i class="fas fa-chevron-right"></i>
-                            </span>
-                        </div>
-                    `;
-                }
+                const nextBtn = document.createElement('div');
+                nextBtn.className = 'page-item';
+                nextBtn.innerHTML = `
+                    <a href="#" class="page-link ${currentPage === totalPages ? 'disabled' : ''}" data-page="${currentPage + 1}">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                `;
+                pagination.appendChild(nextBtn);
                 
-                pagination.innerHTML = paginationHTML;
-                
-                // Add event listeners to pagination links
-                document.querySelectorAll('.page-link[data-page]').forEach(link => {
+                // Add event listeners to pagination buttons
+                pagination.querySelectorAll('.page-link:not(.disabled)').forEach(link => {
                     link.addEventListener('click', function(e) {
                         e.preventDefault();
                         currentPage = parseInt(this.getAttribute('data-page'));
@@ -1118,18 +1085,18 @@
                 });
             }
 
-            // Search datasets
-            function searchDatasets() {
-                const searchTerm = searchInput.value.toLowerCase().trim();
+            // Filter datasets based on search query
+            function filterDatasets() {
+                const query = searchInput.value.toLowerCase().trim();
                 
-                if (searchTerm === '') {
+                if (query === '') {
                     filteredDatasets = [...datasets];
                 } else {
                     filteredDatasets = datasets.filter(dataset => 
-                        dataset.title.toLowerCase().includes(searchTerm) ||
-                        dataset.desc.toLowerCase().includes(searchTerm) ||
-                        dataset.category.toLowerCase().includes(searchTerm) ||
-                        dataset.org.toLowerCase().includes(searchTerm)
+                        dataset.title.toLowerCase().includes(query) ||
+                        dataset.desc.toLowerCase().includes(query) ||
+                        dataset.category.toLowerCase().includes(query) ||
+                        dataset.org.toLowerCase().includes(query)
                     );
                 }
                 
@@ -1141,7 +1108,7 @@
                 renderPagination();
             }
 
-            // Sort datasets
+            // Sort datasets based on selected option
             function sortDatasets(sortType) {
                 currentSort = sortType;
                 
@@ -1168,7 +1135,6 @@
                         break;
                 }
                 
-                currentPage = 1;
                 renderDatasets();
                 renderPagination();
             }
@@ -1190,17 +1156,6 @@
                 }
             }
 
-            // Initialize dark mode from localStorage
-            function initDarkMode() {
-                const savedDarkMode = localStorage.getItem('darkMode') === 'true';
-                if (savedDarkMode) {
-                    document.body.classList.add('dark-mode');
-                    const icon = darkModeBtn.querySelector('i');
-                    icon.classList.remove('fa-moon');
-                    icon.classList.add('fa-sun');
-                }
-            }
-
             // Toggle mobile menu
             function toggleMobileMenu() {
                 mainMenu.classList.toggle('active');
@@ -1208,35 +1163,32 @@
 
             // Initialize the page
             function init() {
-                initDarkMode();
+                // Check for saved dark mode preference
+                if (localStorage.getItem('darkMode') === 'true') {
+                    document.body.classList.add('dark-mode');
+                    const icon = darkModeBtn.querySelector('i');
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                }
+                
+                // Render initial datasets and pagination
                 renderDatasets();
                 renderPagination();
                 
                 // Event listeners
-                searchBtn.addEventListener('click', searchDatasets);
-                searchInput.addEventListener('keyup', function(e) {
-                    if (e.key === 'Enter') {
-                        searchDatasets();
-                    }
-                });
+                searchInput.addEventListener('input', filterDatasets);
+                searchBtn.addEventListener('click', filterDatasets);
                 
                 sortBtn.addEventListener('click', function() {
                     sortOptions.classList.toggle('show');
                 });
                 
-                document.querySelectorAll('.sort-option').forEach(option => {
+                sortOptions.querySelectorAll('.sort-option').forEach(option => {
                     option.addEventListener('click', function() {
                         const sortType = this.getAttribute('data-sort');
                         sortDatasets(sortType);
                         sortOptions.classList.remove('show');
                     });
-                });
-                
-                // Close sort dropdown when clicking outside
-                document.addEventListener('click', function(e) {
-                    if (!sortBtn.contains(e.target) && !sortOptions.contains(e.target)) {
-                        sortOptions.classList.remove('show');
-                    }
                 });
                 
                 filterBtn.addEventListener('click', function() {
@@ -1245,6 +1197,13 @@
                 
                 darkModeBtn.addEventListener('click', toggleDarkMode);
                 mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+                
+                // Close sort dropdown when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!sortBtn.contains(e.target) && !sortOptions.contains(e.target)) {
+                        sortOptions.classList.remove('show');
+                    }
+                });
             }
 
             // Start the application
