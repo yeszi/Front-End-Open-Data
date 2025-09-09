@@ -3,717 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Open Data Tanjungpinang</title>
+    <title>Footer dengan Statistik</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* CSS akan ditempatkan di sini */
-        :root {
-            --primary-color: #1a73e8;
-            --secondary-color: #0d47a1;
-            --accent-color: #f8f9fa;
-            --text-color: #202124;
-            --text-light: #5f6368;
-            --bg-color: #ffffff;
-            --card-bg: #f8f9fa;
-            --border-color: #dadce0;
-            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .dark-mode {
-            --primary-color: #8ab4f8;
-            --secondary-color: #a8c7fa;
-            --accent-color: #202124;
-            --text-color: #e8eaed;
-            --text-light: #9aa0a6;
-            --bg-color: #121212;
-            --card-bg: #1e1e1e;
-            --border-color: #5f6368;
-            --shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
         }
-
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
         }
-
-        /* Loader */
-        .loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.9);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-
-        .dark-mode .loader {
-            background-color: rgba(18, 18, 18, 0.9);
-        }
-
-        .loader-content {
-            text-align: center;
-        }
-
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid var(--border-color);
-            border-top: 5px solid var(--primary-color);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Toast */
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #323232;
+        
+        footer {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
-            padding: 12px 24px;
-            border-radius: 4px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s, visibility 0.3s;
-            z-index: 1000;
+            padding: 40px 0 20px;
+            border-radius: 12px 12px 0 0;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
         }
-
-        .toast.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* Header & Navigation */
-        header {
-            background-color: var(--bg-color);
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .logo img {
-            height: 50px;
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--text-color);
-            cursor: pointer;
-        }
-
-        #mainMenu {
-            display: flex;
-            list-style: none;
-            align-items: center;
-        }
-
-        #mainMenu li {
-            margin: 0 10px;
-        }
-
-        #mainMenu a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 500;
-            padding: 8px 12px;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-        }
-
-        #mainMenu a:hover, #mainMenu a.active {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        .mode-toggle {
-            margin-left: 15px;
-        }
-
-        .icon-toggle {
-            background: none;
-            border: none;
-            font-size: 1.2rem;
-            color: var(--text-color);
-            cursor: pointer;
-            padding: 8px;
-            border-radius: 50%;
-            transition: background-color 0.3s;
-        }
-
-        .icon-toggle:hover {
-            background-color: var(--accent-color);
-        }
-
-        .icon-toggle.active {
-            color: #f1c40f;
-        }
-
-        /* Hero Section */
-        .hero-section {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 80px 20px;
-            text-align: center;
-        }
-
-        .hero-section h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        .hero-section h2 {
-            font-size: 1.5rem;
-            font-weight: 400;
-            margin-bottom: 40px;
-        }
-
-        .search-container {
-            max-width: 600px;
-            margin: 0 auto 60px;
-        }
-
-        .search-bar {
-            display: flex;
-            background: white;
-            border-radius: 30px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .search-bar input {
-            flex: 1;
-            border: none;
-            padding: 15px 20px;
-            font-size: 1rem;
-            outline: none;
-        }
-
-        .search-bar button {
-            background: var(--secondary-color);
-            border: none;
-            color: white;
-            padding: 15px 25px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .search-bar button:hover {
-            background: #0b3d91;
-        }
-
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-top: 40px;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-item span {
-            display: block;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .stat-item p {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-
-        /* Sections */
-        section {
-            padding: 60px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .section-title h2 {
-            font-size: 2rem;
-            color: var(--text-color);
-            position: relative;
-            display: inline-block;
-            padding-bottom: 10px;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background-color: var(--primary-color);
-        }
-
-        /* About Open Data */
-        .about-content {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-        }
-
-        .about-text {
-            flex: 1;
-        }
-
-        .about-text p {
-            margin-bottom: 20px;
-            color: var(--text-light);
-        }
-
-        .about-image {
-            flex: 1;
-        }
-
-        .about-image img {
-            width: 100%;
-            border-radius: 8px;
-            box-shadow: var(--shadow);
-        }
-
-        .view-more {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: background-color 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-
-        .view-more:hover {
-            background-color: var(--secondary-color);
-        }
-
-        /* Dataset List */
-        .dataset-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .dataset-item {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: var(--shadow);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .dataset-title {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: var(--text-color);
-        }
-
-        .dataset-meta {
+        
+        .footer-content {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-
-        .dataset-meta span {
-            background-color: var(--accent-color);
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            color: var(--text-light);
-        }
-
-        .dataset-desc {
-            color: var(--text-light);
-            margin-bottom: 20px;
-            flex-grow: 1;
-        }
-
-        .dataset-actions {
-            text-align: right;
-        }
-
-        .dataset-btn {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: background-color 0.3s;
-        }
-
-        .dataset-btn:hover {
-            background-color: var(--secondary-color);
-        }
-
-        /* Categories */
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .category-card {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s;
-        }
-
-        .category-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .category-image {
-            height: 150px;
-            overflow: hidden;
-        }
-
-        .category-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .category-content {
-            padding: 20px;
-        }
-
-        .category-title {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: var(--text-color);
-        }
-
-        .category-desc {
-            color: var(--text-light);
-            margin-bottom: 10px;
-            font-size: 0.9rem;
-        }
-
-        .category-count {
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--card-bg);
-            padding: 60px 0 20px;
-            color: var(--text-light);
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            justify-content: space-between;
             gap: 30px;
-            margin-bottom: 40px;
+            padding: 0 20px;
         }
-
+        
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
         .footer-col img {
-            height: 50px;
-            margin-right: 10px;
+            max-width: 120px;
             margin-bottom: 15px;
+            margin-right: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            vertical-align: middle;
         }
-
+        
+        .footer-col p {
+            margin: 10px 0;
+            font-size: 14px;
+            color: #e0e0e0;
+        }
+        
         .footer-col h3 {
-            color: var(--text-color);
+            font-size: 18px;
             margin-bottom: 20px;
-            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
         }
-
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 3px;
+            background: #ff6b6b;
+        }
+        
         .footer-col ul {
             list-style: none;
         }
-
+        
         .footer-col ul li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
-
+        
         .footer-col ul li a {
-            color: var(--text-light);
+            color: #b3b3b3;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: all 0.3s ease;
+            display: block;
         }
-
+        
         .footer-col ul li a:hover {
-            color: var(--primary-color);
+            color: #ffffff;
+            padding-left: 5px;
         }
-
+        
+        .footer-col ul li i {
+            margin-right: 10px;
+            color: #ff6b6b;
+            width: 20px;
+            text-align: center;
+        }
+        
         .social-links {
             display: flex;
             gap: 15px;
             margin-top: 20px;
         }
-
+        
         .social-links a {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             width: 40px;
             height: 40px;
-            background-color: var(--accent-color);
-            color: var(--text-color);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .social-links a:hover {
-            background-color: var(--primary-color);
             color: white;
-        }
-
-        .footer-login-btn {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 4px;
+            transition: all 0.3s ease;
             text-decoration: none;
-            margin-top: 15px;
-            transition: background-color 0.3s;
-            border: none;
-            cursor: pointer;
         }
-
-        .footer-login-btn:hover {
-            background-color: var(--secondary-color);
+        
+        .social-links a:hover {
+            background: #ff6b6b;
+            transform: translateY(-3px);
         }
-
+        
         .copyright {
             text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid var(--border-color);
-            font-size: 0.9rem;
+            padding-top: 30px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: #a0a0a0;
         }
-
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .about-content {
-                flex-direction: column;
-            }
-            
-            .hero-section h1 {
-                font-size: 2rem;
-            }
-            
-            .hero-section h2 {
-                font-size: 1.2rem;
-            }
-            
-            .stats {
-                gap: 20px;
-            }
-            
-            .stat-item span {
-                font-size: 2rem;
-            }
+        
+        .footer-login-btn {
+            background: linear-gradient(to right, #ff6b6b, #ff8e8e);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
         }
-
+        
+        .footer-login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 107, 107, 0.4);
+        }
+        
+        /* Gaya untuk statistik pengunjung */
+        .visitor-stats {
+            display: flex;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px;
+            margin: 15px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-item {
+            text-align: center;
+            flex: 1;
+            padding: 0 5px;
+        }
+        
+        .stat-value {
+            display: block;
+            font-size: 18px;
+            font-weight: bold;
+            color: #4cdbdc;
+            margin-bottom: 3px;
+        }
+        
+        .stat-label {
+            font-size: 11px;
+            color: #e0e0e0;
+            text-transform: uppercase;
+        }
+        
+        .stat-divider {
+            width: 1px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 0 5px;
+        }
+        
+        /* Gaya responsif */
         @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            #mainMenu {
-                position: fixed;
-                top: 80px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 80px);
-                background-color: var(--bg-color);
-                flex-direction: column;
-                justify-content: flex-start;
-                padding-top: 40px;
-                transition: left 0.3s;
-            }
-            
-            #mainMenu.active {
-                left: 0;
-            }
-            
-            #mainMenu li {
-                margin: 15px 0;
-            }
-            
-            .stats {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
             .footer-content {
-                grid-template-columns: 1fr;
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .visitor-stats {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .stat-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .stat-divider {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
-    <div class="loader" id="loader">
-        <div class="loader-content">
-            <div class="spinner"></div>
-            <p>Memuat Data...</p>
-        </div>
+    <div class="container">
+        <h2>Halaman Contoh</h2>
+        <p>Halaman ini menunjukkan footer dengan statistik pengunjung yang ditambahkan di bawah logo.</p>
+        <p>Scroll ke bawah untuk melihat footer.</p>
     </div>
-    <div class="toast" id="toast"></div>
-
-    <header>
-        <nav>
-            <div class="logo">
-                <img src="images/opendata tg.png" alt="Open Data Logo">
-            </div>
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
-            <ul id="mainMenu">
-                <li><a href="index.html" class="active">Beranda</a></li>
-                <li><a href="menu navbar/dataset.html">Dataset</a></li>
-                <li><a href="menu navbar/organisasi.html">Organisasi</a></li>
-                <li><a href="menu navbar/grup.html">Grup</a></li>
-                <li><a href="menu navbar/tentang.html">Tentang</a></li>
-                <li><a href="menu navbar/ketentuan pengguna.html">Ketentuan Pengguna</a></li>
-                <li class="mode-toggle">
-                    <button id="darkModeBtn" class="icon-toggle" aria-label="Toggle Dark Mode">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                </li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <section class="hero-section">
-            <h1>Satu Data Tanjungpinang</h1>
-            <h2>Website Resmi Kota Tanjungpinang</h2>
-            
-            <div class="search-container">
-                <div class="search-bar">
-                    <input type="text" id="searchInput" placeholder="Cari dataset...">
-                    <button id="searchBtn">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <div class="stats">
-                <div class="stat-item" id="datasetStat">
-                    <span>0</span>
-                    <p>Dataset</p>
-                </div>
-                <div class="stat-item" id="orgStat">
-                    <span>0</span>
-                    <p>Organisasi</p>
-                </div>
-                <div class="stat-item" id="categoryStat">
-                    <span>0</span>
-                    <p>Kategori</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="about-opendata">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Apa Itu Open Data?</h2>
-                </div>
-                <div class="about-content">
-                    <div class="about-text">
-                        <p>Open Data Kota Tanjungpinang adalah inisiatif digital Pemerintah Kota Tanjungpinang yang bertujuan untuk menyediakan data terbuka kepada masyarakat. Data terbuka adalah data yang dapat digunakan, dimanfaatkan, disebarluaskan oleh siapa saja dan untuk tujuan apapun.</p>
-                        <p>Platform ini menyediakan berbagai dataset dari berbagai sektor pemerintahan untuk mendukung transparansi, inovasi, dan pengambilan keputusan berbasis data.</p>
-                        <button id="learnMoreBtn" class="view-more">Ketahui Lebih Lanjut</button>
-                    </div>
-                    <div class="about-image">
-                        <img src="https://th.bing.com/th/id/OIP.ILMy4ZBLD4hFxqI-e_qIBwHaEK?w=319&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="Open Data Illustration">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="latest-datasets">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Dataset Terbaru</h2>
-                </div>
-                <div class="dataset-list" id="datasetList">
-                    <!-- Dataset items will be inserted here by JavaScript -->
-                </div>
-                <div style="text-align: center; margin-top: 30px;">
-                    <a href="#" class="view-more">Lihat Semua Dataset</a>
-                </div>
-            </div>
-        </section>
-
-        <section class="categories">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Kategori Dataset</h2>
-                </div>
-                <div class="category-grid" id="categoryGrid">
-                    <!-- Category cards will be inserted here by JavaScript -->
-                </div>
-            </div>
-        </section>
-    </main>
 
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-col">
-                    <img src="images/logo pemkot.jpg" alt="Logo Pemerintah Kota Tanjungpinang">
-                    <img src="images/logo diskominfo.jpg" alt="Logo Diskominfo Tanjungpinang">
+                    <img src="https://via.placeholder.com/120x60/2a5298/ffffff?text=Logo+Pemkot" alt="Logo Pemerintah Kota Tanjungpinang">
+                    <img src="https://via.placeholder.com/120x60/1e3c72/ffffff?text=Diskominfo" alt="Logo Diskominfo Tanjungpinang">
+                    
+                    <!-- Statistik Pengunjung -->
+                    <div class="visitor-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">128</span>
+                            <span class="stat-label">Hari Ini</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <span class="stat-value">845</span>
+                            <span class="stat-label">Minggu Ini</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <span class="stat-value">3,210</span>
+                            <span class="stat-label">Bulan Ini</span>
+                        </div>
+                    </div>
+                    
                     <p>Open Data Kota Tanjungpinang</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -736,10 +274,10 @@
                 <div class="footer-col">
                     <h3>Kategori</h3>
                     <ul>
-                        <li><a href="#">Kependudukan</a></li>
-                        <li><a href="#">Kesehatan</a></li>
-                        <li><a href="#">Pendidikan</a></li>
-                        <li><a href="#">Infrastruktur</a></li>
+                        <li><a href="./dataset.html">Kependudukan</a></li>
+                        <li><a href="./dataset.html">Kesehatan</a></li>
+                        <li><a href="./dataset.html">Pendidikan</a></li>
+                        <li><a href="./dataset.html">Infrastruktur</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -748,7 +286,10 @@
                         <li><i class="fas fa-map-marker-alt"></i> Jl. Merdeka No. 1, Tanjungpinang</li>
                         <li><i class="fas fa-phone"></i> (0771) 123456</li>
                         <li><i class="fas fa-envelope"></i> opendata@tanjungpinangkota.go.id</li>
-                        <li><a href="login.html" class="footer-login-btn"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                    </ul>
+                    <img src="https://via.placeholder.com/200x60/1e3c72/ffffff?text=Open+Data+File" alt="Logo Open Data" style="margin-top: 15px;">
+                    <ul>
+                         <button class="footer-login-btn"><i class="fas fa-sign-in-alt"></i> Login</button>
                     </ul>
                 </div>
             </div>
@@ -757,267 +298,5 @@
             </div>
         </div>
     </footer>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // --- Logika Mode Malam ---
-            const body = document.body;
-            const darkModeBtn = document.getElementById('darkModeBtn');
-
-            function toggleDarkMode() {
-                body.classList.toggle('dark-mode');
-                const isDarkMode = body.classList.contains('dark-mode');
-                localStorage.setItem('darkMode', isDarkMode);
-                darkModeBtn.classList.toggle('active', isDarkMode);
-                
-                // Update icon based on mode
-                const icon = darkModeBtn.querySelector('i');
-                if (body.classList.contains('dark-mode')) {
-                    icon.classList.remove('fa-moon');
-                    icon.classList.add('fa-sun');
-                } else {
-                    icon.classList.remove('fa-sun');
-                    icon.classList.add('fa-moon');
-                }
-            }
-
-            darkModeBtn.addEventListener('click', toggleDarkMode);
-
-            function loadUserPreferences() {
-                const isDarkMode = localStorage.getItem('darkMode') === 'true';
-                
-                if (isDarkMode) {
-                    body.classList.add('dark-mode');
-                    darkModeBtn.classList.add('active');
-                    const icon = darkModeBtn.querySelector('i');
-                    icon.classList.remove('fa-moon');
-                    icon.classList.add('fa-sun');
-                }
-            }
-
-            // --- Akhir Logika Mode Malam ---
-
-            // Show loading screen
-            const loader = document.getElementById('loader');
-            loader.style.display = 'flex';
-
-            setTimeout(() => {
-                initApp();
-                loader.style.display = 'none';
-            }, 1500);
-
-            // Mobile menu toggle
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const mainMenu = document.getElementById('mainMenu');
-
-            mobileMenuBtn.addEventListener('click', function() {
-                mainMenu.classList.toggle('active');
-                this.innerHTML = mainMenu.classList.contains('active') ?
-                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-            });
-
-            // Animate stats counting
-            function animateStats() {
-                const datasetStat = document.getElementById('datasetStat').querySelector('span');
-                const orgStat = document.getElementById('orgStat').querySelector('span');
-                const categoryStat = document.getElementById('categoryStat').querySelector('span');
-                
-                animateValue(datasetStat, 0, 1436, 2000);
-                animateValue(orgStat, 0, 47, 1500);
-                animateValue(categoryStat, 0, 26, 1000);
-            }
-
-            function animateValue(element, start, end, duration) {
-                let startTimestamp = null;
-                const step = (timestamp) => {
-                    if (!startTimestamp) startTimestamp = timestamp;
-                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                    element.innerHTML = Math.floor(progress * (end - start) + start);
-                    if (progress < 1) {
-                        window.requestAnimationFrame(step);
-                    }
-                };
-                window.requestAnimationFrame(step);
-            }
-
-            // Dataset list functionality
-            const datasets = [
-                {
-                    id: 1,
-                    title: "Data Kependudukan 2023",
-                    category: "Kependudukan",
-                    org: "Dinas Kependudukan",
-                    date: "15 Jun 2023",
-                    desc: "Data demografi penduduk Kota Tanjungpinang tahun 2023"
-                },
-                {
-                    id: 2,
-                    title: "Fasilitas Kesehatan",
-                    category: "Kesehatan",
-                    org: "Dinas Kesehatan",
-                    date: "10 Mei 2023",
-                    desc: "Daftar fasilitas kesehatan di Kota Tanjungpinang"
-                },
-                {
-                    id: 3,
-                    title: "Sekolah dan Madrasah",
-                    category: "Pendidikan",
-                    org: "Dinas Pendidikan",
-                    date: "28 Apr 2023",
-                    desc: "Data sekolah dan madrasah di Kota Tanjungpinang"
-                },
-                {
-                    id: 4,
-                    title: "Jaringan Jalan",
-                    category: "Infrastruktur",
-                    org: "Dinas PUPR",
-                    date: "12 Apr 2023",
-                    desc: "Data jaringan jalan Kota Tanjungpinang"
-                },
-                {
-                    id: 5,
-                    title: "Pasar Tradisional",
-                    category: "Ekonomi",
-                    org: "Dinas Perdagangan",
-                    date: "5 Mar 2023",
-                    desc: "Lokasi dan data pasar tradisional di Kota Tanjungpinang"
-                }
-            ];
-            
-            function renderDatasetList() {
-                const datasetList = document.getElementById('datasetList');
-                datasetList.innerHTML = '';
-                
-                datasets.forEach(dataset => {
-                    const item = document.createElement('div');
-                    item.className = 'dataset-item';
-                    item.innerHTML = `
-                        <div class="dataset-info">
-                            <h3 class="dataset-title">${dataset.title}</h3>
-                            <div class="dataset-meta">
-                                <span>${dataset.category}</span>
-                                <span>${dataset.org}</span>
-                                <span>${dataset.date}</span>
-                            </div>
-                            <p class="dataset-desc">${dataset.desc}</p>
-                        </div>
-                        <div class="dataset-actions">
-                            <a href="#" class="dataset-btn" data-id="${dataset.id}">Unduh Dataset</a>
-                        </div>
-                    `;
-                    datasetList.appendChild(item);
-                });
-                
-                document.querySelectorAll('.dataset-btn').forEach(btn => {
-                    btn.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        const datasetId = this.getAttribute('data-id');
-                        showToast(`Memulai unduhan dataset #${datasetId}`);
-                    });
-                });
-            }
-
-            // Generate category cards with images
-            const categories = [
-                { 
-                    name: "Kependudukan", 
-                    count: 324, 
-                    image: "https://via.placeholder.com/300x150?text=Kependudukan",
-                    desc: "Data terkait jumlah, distribusi, dan karakteristik penduduk"
-                },
-                { 
-                    name: "Kesehatan", 
-                    count: 156, 
-                    image: "https://via.placeholder.com/300x150?text=Kesehatan",
-                    desc: "Data fasilitas kesehatan, penyakit, dan layanan medis"
-                },
-                { 
-                    name: "Pendidikan", 
-                    count: 98, 
-                    image: "https://via.placeholder.com/300x150?text=Pendidikan",
-                    desc: "Data sekolah, siswa, guru, dan prestasi pendidikan"
-                },
-                { 
-                    name: "Infrastruktur", 
-                    count: 210, 
-                    image: "https://via.placeholder.com/300x150?text=Infrastruktur",
-                    desc: "Data jalan, jembatan, bangunan, dan fasilitas publik"
-                },
-                { 
-                    name: "Ekonomi", 
-                    count: 187, 
-                    image: "https://via.placeholder.com/300x150?text=Ekonomi",
-                    desc: "Data perdagangan, industri, investasi, dan UMKM"
-                },
-                { 
-                    name: "Lingkungan", 
-                    count: 76, 
-                    image: "https://via.placeholder.com/300x150?text=Lingkungan",
-                    desc: "Data kualitas udara, air, tutupan hijau, dan pengelolaan sampah"
-                }
-            ];
-
-            function renderCategoryCards() {
-                const categoryGrid = document.getElementById('categoryGrid');
-                categoryGrid.innerHTML = '';
-
-                categories.forEach(category => {
-                    const card = document.createElement('div');
-                    card.className = 'category-card';
-                    card.innerHTML = `
-                        <div class="category-image">
-                            <img src="${category.image}" alt="${category.name}">
-                        </div>
-                        <div class="category-content">
-                            <h3 class="category-title">${category.name}</h3>
-                            <p class="category-desc">${category.desc}</p>
-                            <p><span class="category-count">${category.count}</span> dataset tersedia</p>
-                        </div>
-                    `;
-                    categoryGrid.appendChild(card);
-                });
-            }
-
-            // Search functionality
-            const searchBtn = document.getElementById('searchBtn');
-            const searchInput = document.getElementById('searchInput');
-            
-            searchBtn.addEventListener('click', performSearch);
-            searchInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') performSearch();
-            });
-
-            function performSearch() {
-                const query = searchInput.value.trim();
-                if (query) {
-                    showToast(`Mencari: "${query}"`);
-                }
-            }
-
-            // Learn more button
-            document.getElementById('learnMoreBtn').addEventListener('click', function() {
-                showToast('Mengarahkan ke halaman tentang');
-            });
-
-            // Toast notification
-            function showToast(message) {
-                const toast = document.getElementById('toast');
-                toast.textContent = message;
-                toast.classList.add('show');
-                
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 3000);
-            }
-
-            // Initialize the app
-            function initApp() {
-                loadUserPreferences();
-                animateStats();
-                renderDatasetList();
-                renderCategoryCards();
-            }
-        });
-    </script>
 </body>
 </html>

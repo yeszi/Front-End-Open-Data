@@ -744,4 +744,18 @@
             }
         }
 
+        .visitor-stats {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .stat-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .stat-divider {
+                display: none;
+            }
         
